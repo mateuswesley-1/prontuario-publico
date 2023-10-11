@@ -31,29 +31,16 @@ import org.springframework.stereotype.Component;
 @SQLDelete(sql = "UPDATE credenciais_tb SET deleted_at = CURRENT_TIMESTAMP WHERE id=?")
 @Where(clause = "deleted_at is null")
 public class Credenciais extends BaseEntity implements UserDetails  {
-    @Id
-    public String id;
-
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "funcionario_id")
-    public Funcionario funcionario;
 
     @Column(unique = true)
     public String username;
     public String password;
 
 
-    public LocalDateTime deleted_at;
-
-    @UpdateTimestamp
-    public LocalDateTime updated_at;
-    @CreationTimestamp
-    public LocalDateTime created_at;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.stream(funcionario.getCargo().split(",")).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+        return null;
     }
 
     @Override

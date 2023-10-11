@@ -52,7 +52,7 @@ public abstract class BaseRepositoryJBDC<T extends BaseEntity> {
         return new PageImpl<>(result, pageable, result.size());
     }
 
-    public T save(T entityInstance){
+    public void save(T entityInstance){
         this.columns = new StringBuilder();
         this.placeHolders = new StringBuilder();
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -68,11 +68,6 @@ public abstract class BaseRepositoryJBDC<T extends BaseEntity> {
             .append(placeHolders)
             .append(")");
         jdbcTemplate.update(sql.toString(), this.paramSource, keyHolder);
-        Map<String, Object> keys = keyHolder.getKeys();
-        assert keys != null;
-        Optional<T> result = this.findById((String) keys.get("id"));
-        if(result.isPresent ()) return result.get();
-        throw new EntityNotFoundException("");
      }
 
      public void delete(String id){

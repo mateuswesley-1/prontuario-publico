@@ -66,15 +66,10 @@ public abstract class BaseController<T extends BaseEntity,
     }
 
     @PostMapping
-    public ResponseEntity<R> create(@RequestBody E dto){
+    public ResponseEntity<Object> create(@RequestBody E dto){
         T entity = mapper.requestDtoToEntity(dto, entityType);
-        T createdEntity = service.add(entity);
-        URI uri = ServletUriComponentsBuilder
-                    .fromCurrentRequest()
-                    .path("/{id}")
-                    .buildAndExpand(createdEntity.getId())
-                    .toUri();
-        return ResponseEntity.created(uri).build();
+        service.add(entity);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @DeleteMapping("/{id}")
@@ -86,7 +81,8 @@ public abstract class BaseController<T extends BaseEntity,
     @PatchMapping("/{id}")
     public EntityResponseDTO<?> patchOrUpdate(@PathVariable String id, @RequestBody E dto){
         T entity = mapper.requestDtoToEntity(dto, entityType);
-        R responseDTO = mapper.entityToResponseDto(service.update(id, entity), entityResponseDTOType);
+        service.update(id, entity);
+        R responseDTO = mapper.entityToResponseDto(service.getById(id), entityResponseDTOType);
         responseDTO.addLinks();
         return responseDTO;
     }

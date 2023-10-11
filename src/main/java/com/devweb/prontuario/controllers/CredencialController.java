@@ -4,12 +4,11 @@ import com.devweb.prontuario.dto.EntityResponseDTO;
 import com.devweb.prontuario.dto.credenciais.CredenciaisRequestDTO;
 import com.devweb.prontuario.dto.credenciais.CredenciaisResponseDTO;
 import com.devweb.prontuario.repositories.CredenciaisRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.devweb.prontuario.dto.credenciais.CredenciaisMapper;
 import com.devweb.prontuario.entities.Credenciais;
@@ -29,15 +28,16 @@ public class CredencialController
     CredenciaisMapper mapper;
 
     public CredencialController(CredenciaisService service, CredenciaisMapper mapper) {
-        super(mapper, service, Credenciais.class, CredenciaisResponseDTO.class);
+        super ( mapper, service, Credenciais.class, CredenciaisResponseDTO.class );
         this.service = service;
         this.mapper = mapper;
     }
 
+    @Override
     @PostMapping
-    public ResponseEntity<CredenciaisResponseDTO> create(@RequestBody CredenciaisRequestDTO dto){
-        Credenciais credenciais = this.mapper.requestDtoToEntity(dto);
-        service.create(credenciais);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<Object> create(@RequestBody CredenciaisRequestDTO dto) {
+        Credenciais credenciais = this.mapper.requestDtoToEntity ( dto );
+        service.create ( credenciais );
+        return ResponseEntity.status ( HttpStatus.CREATED ).build ( );
     }
 }

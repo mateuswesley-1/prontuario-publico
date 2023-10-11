@@ -33,10 +33,10 @@ public class BaseService<T extends BaseEntity, Repo extends BaseRepositoryJBDC<T
         throw new EntityNotFoundException(Mensagens.NOT_FOUND.formatar(entityType.getName()));
     }
 
-    public T add(T entityInstance){
+    public void add(T entityInstance){
         entityInstance.setCreatedAt(LocalDateTime.now());
         entityInstance.setUpdatedAt(LocalDateTime.now());
-        return repository.save(entityInstance);
+        repository.save(entityInstance);
     }
 
     public void delete(String id){
@@ -49,13 +49,13 @@ public class BaseService<T extends BaseEntity, Repo extends BaseRepositoryJBDC<T
 
     }
     
-    public T update(String id, T newInstance) {
+    public void update(String id, T newInstance) {
         Optional<T> response = repository.findById(id);
         if(response.isPresent()) {
             response.get().setUpdatedAt(LocalDateTime.now());
             T actualInstance = response.get();
             this.patch(newInstance, actualInstance);
-            return repository.save(actualInstance);
+            repository.save(actualInstance);
         }
         throw new EntityNotFoundException(Mensagens.NOT_FOUND.formatar(entityType.getName()));
     }

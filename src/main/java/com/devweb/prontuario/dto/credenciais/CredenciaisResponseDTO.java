@@ -10,6 +10,5 @@ public class CredenciaisResponseDTO extends EntityResponseDTO<CredencialControll
 
     private String username;
     private String password;
-    private String IdFuncionario;
 
 }

@@ -12,5 +12,4 @@ import lombok.EqualsAndHashCode;
 public class CredenciaisRequestDTO extends EntityRequestDto {
     private String username;
     private String password;
-    private String IdFuncionario;
 }

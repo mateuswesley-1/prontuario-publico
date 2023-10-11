@@ -33,9 +33,9 @@ public class CredenciaisService extends BaseService<Credenciais, CredenciaisRepo
         }
     }
 
-    public Credenciais create(Credenciais c){
+    public void create(Credenciais c){
         c.setPassword(encoder.encode(c.getPassword()));
-        return repository.save(c);
+        repository.save(c);
     }
     
 }
