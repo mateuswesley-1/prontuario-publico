@@ -2,7 +2,6 @@ package com.devweb.prontuario.repositories;
 
 
 import com.devweb.prontuario.entities.BaseEntity;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.Data;
 
 import org.springframework.data.domain.Page;
@@ -33,7 +32,7 @@ public abstract class BaseRepositoryJBDC<T extends BaseEntity> {
         this.jdbcTemplate = jdbcTemplate;
     }
     public Optional<T> findById(String id){
-        String sql = "SELECT * FROM " + this.NomeTabela() + " WHERE id = ? AND deleted_at = null";
+        String sql = "SELECT * FROM " + this.NomeTabela() + " WHERE id = ? AND deleted_at is null";
 
         RowMapper<T> rowMapper = this.getRowMapper();
         Optional<T> result  = jdbcTemplate.
