@@ -1,0 +1,29 @@
+package com.devweb.prontuario.dto.consulta;
+
+import java.util.List;
+
+import com.devweb.prontuario.controllers.ConsultaController;
+import com.devweb.prontuario.dto.EntityResponseDTO;
+import com.devweb.prontuario.dto.Funcionario.FuncionarioResponseDTO;
+import com.devweb.prontuario.dto.atestado.AtestadoResponseDTO;
+import com.devweb.prontuario.dto.medico.MedicoResponseDTO;
+import com.devweb.prontuario.dto.prescricao.PrescricaoResponseDTO;
+import com.devweb.prontuario.entities.Consulta;
+import com.devweb.prontuario.entities.Funcionario;
+import com.devweb.prontuario.entities.Medico;
+
+import lombok.*;
+
+@Getter
+@Setter
+public class ConsultaResponseDTO extends EntityResponseDTO<ConsultaController> {
+    public ConsultaResponseDTO(){
+        super(ConsultaController.class);
+    }
+
+    private MedicoResponseDTO medico;
+    private FuncionarioResponseDTO paciente;
+    private String anamnese;
+    private List<PrescricaoResponseDTO> prescricao;
+    private AtestadoResponseDTO atestado;
+}
