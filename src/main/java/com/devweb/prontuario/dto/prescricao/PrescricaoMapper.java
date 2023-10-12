@@ -11,8 +11,8 @@ public class PrescricaoMapper extends BaseMapper<Precricao, PrescricaoRequestDTO
     Precricao prescricao;
     MedicamentoService medicamentoService;
     
-    public PrescricaoMapper(ModelMapper mapper, Precricao prescricao) {
-        super(mapper, prescricao);
+    public PrescricaoMapper(ModelMapper mapper) {
+        super(mapper);
     }
 
     
@@ -22,9 +22,6 @@ public class PrescricaoMapper extends BaseMapper<Precricao, PrescricaoRequestDTO
         return prescricao;
     }
 
-    public PrescricaoResponseDTO entityToResponseDto(Precricao prescricao){
-        return this.mapper.map(prescricao, PrescricaoResponseDTO.class); 
-    }
 }
     
 

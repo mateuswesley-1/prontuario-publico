@@ -13,8 +13,8 @@ public class AtestadoMapper extends BaseMapper<Atestado, AtestadoRequestDTO, Ate
 
 
 
-    public AtestadoMapper(ModelMapper mapper, Atestado atestado) {
-        super(mapper, atestado);
+    public AtestadoMapper(ModelMapper mapper) {
+        super(mapper);
     }
 
     
@@ -22,10 +22,5 @@ public class AtestadoMapper extends BaseMapper<Atestado, AtestadoRequestDTO, Ate
         return this.mapper.map(dto, Atestado.class);
     }
 
-    public AtestadoResponseDTO entityToResponseDto(Atestado atestado){
-        return this.mapper.map(atestado, AtestadoResponseDTO.class);
-        
-    }
 
-    
 }

@@ -1,7 +1,6 @@
 package com.devweb.prontuario.dto.consulta;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.devweb.prontuario.dto.BaseMapper;
@@ -17,8 +16,8 @@ public class ConsultaMapper extends BaseMapper<Consulta, ConsultaRequestDTO, Con
     FuncionarioService funcionarioService;
 
 
-    public ConsultaMapper(ModelMapper mapper, Consulta consulta, FuncionarioService funcionarioService, MedicoService medicoService) {
-        super(mapper, consulta);
+    public ConsultaMapper(ModelMapper mapper, FuncionarioService funcionarioService, MedicoService medicoService) {
+        super(mapper);
         this.medicoService = medicoService;
         this.funcionarioService = funcionarioService;
     }
@@ -30,7 +29,4 @@ public class ConsultaMapper extends BaseMapper<Consulta, ConsultaRequestDTO, Con
         return consulta;
     }
 
-    public ConsultaResponseDTO entityToResponseDto(Consulta consulta){
-        return super.entityToResponseDto(consulta, ConsultaResponseDTO.class);
-    }
 }

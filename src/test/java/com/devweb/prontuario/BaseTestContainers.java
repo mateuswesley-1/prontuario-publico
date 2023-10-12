@@ -1,15 +1,17 @@
 package com.devweb.prontuario;
 
+import com.github.javafaker.Faker;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.BeforeAll;
+import org.springframework.boot.jdbc.DataSourceBuilder;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
+import javax.sql.DataSource;
 
 @Testcontainers
 public class BaseTestContainers {
@@ -22,11 +24,12 @@ public class BaseTestContainers {
                 postgreSQLContainer.getPassword()
         ).load();
         flyway.migrate();
+        System.out.println (  );
     }
 
     @Container
     protected static final PostgreSQLContainer<?> postgreSQLContainer =
-            new PostgreSQLContainer<> ("postgres:latest")
+            new PostgreSQLContainer ("postgres:latest")
                     .withDatabaseName ( "prontuario-repo-unit-test" )
                     .withUsername ( "mateus" )
                     .withPassword ( "senha" );
@@ -37,5 +40,19 @@ public class BaseTestContainers {
         registry.add("spring.datasource.password", postgreSQLContainer::getPassword);
     }
 
+    private static DataSource getDataSource(){
+        DataSourceBuilder<?> builder = DataSourceBuilder.create()
+                .driverClassName(postgreSQLContainer.getDriverClassName())
+                .url(postgreSQLContainer.getJdbcUrl())
+                .username ( postgreSQLContainer.getUsername () )
+                .password ( postgreSQLContainer.getPassword () );
+        return builder.build ();
+    }
+
+    protected static NamedParameterJdbcTemplate getJbdcTemplate(){
+        return new NamedParameterJdbcTemplate(BaseTestContainers.getDataSource ());
+    }
+
+    protected static final Faker faker = new Faker();
 
 }

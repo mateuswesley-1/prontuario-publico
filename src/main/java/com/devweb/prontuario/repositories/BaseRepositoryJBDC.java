@@ -32,20 +32,19 @@ public abstract class BaseRepositoryJBDC<T extends BaseEntity> {
         this.jdbcTemplate = jdbcTemplate;
     }
     public Optional<T> findById(String id){
-        String sql = "SELECT * FROM " + this.NomeTabela() + " WHERE id = ? AND deleted_at is null";
+        String sql = "SELECT * FROM " + this.NomeTabela ( ) + " WHERE id = ? AND deleted_at is null";
 
         RowMapper<T> rowMapper = this.getRowMapper();
-        Optional<T> result  = jdbcTemplate.
+        return jdbcTemplate.
                 getJdbcOperations()
                 .query(sql, rowMapper, id)
                 .stream()
                 .findFirst();
 
-        return result;
     }
 
     public Page<T> findAll(Pageable pageable){
-        String sql = "SELECT * FROM " + this.NomeTabela();;
+        String sql = "SELECT * FROM " + this.NomeTabela();
         RowMapper<T> rowMapper = this.getRowMapper();
         List<T> result = jdbcTemplate.query(sql, rowMapper);
         return new PageImpl<>(result, pageable, result.size());

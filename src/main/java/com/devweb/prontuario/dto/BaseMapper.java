@@ -11,13 +11,11 @@ public class BaseMapper<
         T extends BaseEntity,
         E extends EntityRequestDto,
         R extends EntityResponseDTO<?>> {
-    T entity;
 
     protected ModelMapper mapper;
 
-    public BaseMapper(ModelMapper mapper, T entity){
+    public BaseMapper(ModelMapper mapper){
         this.mapper = mapper;
-        this.entity = entity;
     }
     public  T requestDtoToEntity(E dto, Class<T> entityType){
         T entity = mapper.map(dto, entityType);
@@ -29,7 +27,7 @@ public class BaseMapper<
 
     public R entityToResponseDto(T entity, Class<R> dtoType){
         return mapper.map(entity, dtoType);
-    };
+    }
 
 }
 

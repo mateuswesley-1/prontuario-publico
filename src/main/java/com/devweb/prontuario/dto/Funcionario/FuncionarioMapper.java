@@ -11,16 +11,11 @@ import com.devweb.prontuario.entities.Funcionario;
 public class FuncionarioMapper extends BaseMapper<Funcionario, FuncionarioRequestDTO, FuncionarioResponseDTO>{
     
 
-    public FuncionarioMapper(ModelMapper mapper, Funcionario funcionario){
-        super(mapper, funcionario);
+    public FuncionarioMapper(ModelMapper mapper){
+        super(mapper);
     }
     public Funcionario requestDtoToEntity(FuncionarioRequestDTO dto){
         return super.requestDtoToEntity (dto, Funcionario.class);
     }
 
-    public FuncionarioResponseDTO entityToResponseDto(Funcionario entity){
-        return super.entityToResponseDto (entity, FuncionarioResponseDTO.class);
-    }
-
-    
 }

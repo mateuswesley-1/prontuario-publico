@@ -3,7 +3,6 @@ package com.devweb.prontuario.dto.medico;
 import com.devweb.prontuario.dto.BaseMapper;
 import com.devweb.prontuario.dto.Funcionario.FuncionarioMapper;
 import com.devweb.prontuario.dto.Funcionario.FuncionarioRequestDTO;
-import com.devweb.prontuario.dto.credenciais.CredenciaisRequestDTO;
 import com.devweb.prontuario.entities.Funcionario;
 import com.devweb.prontuario.entities.Medico;
 import org.modelmapper.ModelMapper;
@@ -14,8 +13,8 @@ import org.springframework.stereotype.Component;
 public class MedicoMapper extends BaseMapper<Medico, MedicoRequestDTO, MedicoResponseDTO> {
 
     FuncionarioMapper funcionarioMapper;
-    public MedicoMapper(ModelMapper mapper, Medico medico, FuncionarioMapper funcionarioMapper){
-        super(mapper, medico);
+    public MedicoMapper(ModelMapper mapper, FuncionarioMapper funcionarioMapper){
+        super(mapper);
         this.funcionarioMapper = funcionarioMapper;
     }
 
@@ -29,10 +28,4 @@ public class MedicoMapper extends BaseMapper<Medico, MedicoRequestDTO, MedicoRes
         medico.getFuncionario().setCargo("Médico");
         return medico;
     }
-
-    public MedicoResponseDTO entityToResponseDto(Medico entity){
-        return this.mapper.map(entity, MedicoResponseDTO.class);
-    }
-
-
 }
