@@ -11,7 +11,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -27,7 +28,7 @@ class AtestadoRepositoryTest extends BaseTestContainers{
         this.mapper = new AtestadoMapper ( new ModelMapper () );
     }
     @Test
-    void findAll() {
+    void findAllShouldNotReturnEmpty() {
         //Given
         AtestadoRequestDTO atestadoRequestDTO = new AtestadoRequestDTO ();
         atestadoRequestDTO.setDescricao ( faker.lorem ().sentence ( 5 ) );
@@ -44,41 +45,64 @@ class AtestadoRepositoryTest extends BaseTestContainers{
         assertThat(page.getContent ()).isNotEmpty ();
     }
     @Test
-    void findById() {
+    void EntityShouldBePresentWhenIdRight() {
+        // Given
+        String descricao = faker.lorem ().sentence ( 5 );
+        AtestadoRequestDTO atestadoRequestDTO = new AtestadoRequestDTO ();
+        atestadoRequestDTO.setDescricao ( descricao );
+        atestadoRequestDTO.setDuracao ( faker.number ().numberBetween ( 1, 30 ) );
+        Atestado expected = this.mapper.requestDtoToEntity(atestadoRequestDTO, Atestado.class);
+        this.underTest.save ( expected );
+        Pageable pageable = PageRequest.of(1,10);
+        String expectedId = this.underTest.findAll(pageable).getContent ()
+                .stream ()
+                .filter ( e -> e.getDescricao ().equals ( descricao ) )
+                .map (Atestado::getId)
+                .findFirst ().orElseThrow ();
+
+        // When
+        Optional<Atestado> result = this.underTest.findById ( expectedId );
+
+        // Then
+        assertThat (result).isPresent ().hasValueSatisfying ( a -> assertThat ( a.getId () ).isEqualTo ( expectedId ) );
+
     }
 
     @Test
-    void save() {
-        //Given
-        //When
-        //Then
+    void EntityShouldNotBePresentWhenIdWrong() {
+        // Given
+        String wrongId = "id";
+        // When
+        Optional<Atestado> result = this.underTest.findById ( wrongId );
+        // Then
+        assertThat ( result ).isNotPresent ();
     }
 
     @Test
-    void delete() {
-        //Given
-        //When
-        //Then
+    void EntityShouldNotBePresentWhenDeleted() {
+// Given
+        String descricao = faker.lorem ().sentence ( 5 );
+        AtestadoRequestDTO atestadoRequestDTO = new AtestadoRequestDTO ();
+        atestadoRequestDTO.setDescricao ( descricao );
+        atestadoRequestDTO.setDuracao ( faker.number ().numberBetween ( 1, 30 ) );
+        Atestado expected = this.mapper.requestDtoToEntity(atestadoRequestDTO, Atestado.class);
+        this.underTest.save ( expected );
+        Pageable pageable = PageRequest.of(1,10);
+        String expectedId = this.underTest.findAll(pageable).getContent ()
+                .stream ()
+                .filter ( e -> e.getDescricao ().equals ( descricao ) )
+                .map (Atestado::getId)
+                .findFirst ().orElseThrow ();
+
+        // When
+        this.underTest.delete ( expectedId );
+        Optional<Atestado> result = this.underTest.findById ( expectedId );
+
+        // Then
+        assertThat (result).isNotPresent ();
     }
 
-    @Test
-    void nomeTabela() {
-        //Given
-        //When
-        //Then
-    }
 
-    @Test
-    void classFields() {
-        //Given
-        //When
-        //Then
-    }
 
-    @Test
-    void getRowMapper() {
-        //Given
-        //When
-        //Then
-    }
+
 }
