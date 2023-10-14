@@ -1,20 +1,14 @@
 package com.devweb.prontuario.entities;
 
-import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.stream.Collectors;
 
+import com.devweb.prontuario.BaseEntity;
 import jakarta.persistence.*;
-import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.Where;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -35,8 +29,6 @@ public class Credenciais extends BaseEntity implements UserDetails  {
     @Column(unique = true)
     public String username;
     public String password;
-
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

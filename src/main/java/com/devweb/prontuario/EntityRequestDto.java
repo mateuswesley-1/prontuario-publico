@@ -1,4 +1,4 @@
-package com.devweb.prontuario.dto;
+package com.devweb.prontuario;
 
 import lombok.Data;
 

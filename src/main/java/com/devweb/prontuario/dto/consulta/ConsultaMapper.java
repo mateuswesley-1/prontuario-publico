@@ -3,7 +3,7 @@ package com.devweb.prontuario.dto.consulta;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
-import com.devweb.prontuario.dto.BaseMapper;
+import com.devweb.prontuario.BaseMapper;
 import com.devweb.prontuario.entities.Consulta;
 import com.devweb.prontuario.services.FuncionarioService;
 import com.devweb.prontuario.services.MedicoService;

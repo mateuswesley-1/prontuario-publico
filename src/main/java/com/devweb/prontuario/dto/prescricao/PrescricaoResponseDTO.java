@@ -1,11 +1,9 @@
 package com.devweb.prontuario.dto.prescricao;
 
 import com.devweb.prontuario.controllers.PrescricaoController;
-import com.devweb.prontuario.dto.EntityResponseDTO;
+import com.devweb.prontuario.EntityResponseDTO;
 import com.devweb.prontuario.dto.medicamento.MedicamentoResponseDTO;
-import com.devweb.prontuario.entities.Medicamento;
 
-import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;

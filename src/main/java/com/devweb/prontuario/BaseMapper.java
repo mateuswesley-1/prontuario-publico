@@ -1,6 +1,5 @@
-package com.devweb.prontuario.dto;
+package com.devweb.prontuario;
 
-import com.devweb.prontuario.entities.BaseEntity;
 import org.modelmapper.ModelMapper;
 
 import java.time.LocalDateTime;

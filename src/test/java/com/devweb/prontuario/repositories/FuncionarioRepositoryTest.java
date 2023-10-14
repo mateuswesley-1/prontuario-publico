@@ -1,12 +1,10 @@
 package com.devweb.prontuario.repositories;
 
-
 import com.devweb.prontuario.BaseTestContainers;
-import com.devweb.prontuario.entities.Atestado;
+import com.devweb.prontuario.entities.Funcionario;
+import com.devweb.prontuario.entities.Funcionario;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -15,14 +13,13 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class AtestadoRepositoryTest extends BaseTestContainers {
-
-    private AtestadoRepository underTest;
+public class FuncionarioRepositoryTest extends BaseTestContainers{
+    private FuncionarioRepository underTest;
 
 
     @BeforeEach
     void setUp() {
-        this.underTest = new AtestadoRepository (
+        this.underTest = new FuncionarioRepository (
                 BaseTestContainers.getJbdcTemplate ( )
         );
     }
@@ -33,7 +30,7 @@ class AtestadoRepositoryTest extends BaseTestContainers {
         Pageable pageable = PageRequest.of ( 1, 1 );
 
         //When
-        Page<Atestado> page = this.underTest.findAll ( pageable );
+        Page<Funcionario> page = this.underTest.findAll ( pageable );
 
         //Then
         assertThat ( page.getContent ( ) )
@@ -43,10 +40,10 @@ class AtestadoRepositoryTest extends BaseTestContainers {
     @Test
     void EntityShouldBePresentWhenIdRight() {
         // Given
-        String expectedId = "atestado_id";
+        String expectedId = "funcionario_id";
 
         // When
-        Optional<Atestado> result = this.underTest.findById ( expectedId );
+        Optional<Funcionario> result = this.underTest.findById ( expectedId );
 
         // Then
         assertThat ( result )
@@ -60,7 +57,7 @@ class AtestadoRepositoryTest extends BaseTestContainers {
         // Given
         String wrongId = "id";
         // When
-        Optional<Atestado> result = this.underTest.findById ( wrongId );
+        Optional<Funcionario> result = this.underTest.findById ( wrongId );
         // Then
         assertThat ( result ).isNotPresent ( );
     }
@@ -69,11 +66,11 @@ class AtestadoRepositoryTest extends BaseTestContainers {
     void EntityShouldNotBePresentWhenDeleted() {
         // Given
         Pageable pageable = PageRequest.of ( 1, 10 );
-        String expectedId = "atestado_id";
+        String expectedId = "funcionario_id";
 
         // When
         this.underTest.delete ( expectedId );
-        Optional<Atestado> result = this.underTest.findById ( expectedId );
+        Optional<Funcionario> result = this.underTest.findById ( expectedId );
 
         // Then
         assertThat ( result ).isNotPresent ( );

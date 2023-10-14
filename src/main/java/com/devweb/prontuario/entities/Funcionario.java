@@ -1,11 +1,10 @@
 package com.devweb.prontuario.entities;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
+import com.devweb.prontuario.BaseEntity;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
-import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.stereotype.Component;
 
 import jakarta.persistence.Entity;
@@ -29,7 +28,7 @@ import lombok.Setter;
 @SQLDelete(sql = "UPDATE funcionario_tb SET deleted_at = CURRENT_TIMESTAMP WHERE id=?")
 @Where(clause = "deleted_at is null")
 @Builder
-public class Funcionario extends BaseEntity{
+public class Funcionario extends BaseEntity {
 
     @NotBlank(message = "O campo cpf não pode estar em branco.")
     public String cpf;

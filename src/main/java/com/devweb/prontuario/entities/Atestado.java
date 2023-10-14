@@ -1,5 +1,6 @@
 package com.devweb.prontuario.entities;
 
+import com.devweb.prontuario.BaseEntity;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import org.springframework.stereotype.Component;
@@ -24,7 +25,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @SQLDelete(sql = "UPDATE atestado_tb SET deleted_at = CURRENT_TIMESTAMP WHERE id=?")
 @Where(clause = "deleted_at is null")
-public class Atestado extends BaseEntity{
+public class Atestado extends BaseEntity {
     
     @Max(30)
     @Min(1)

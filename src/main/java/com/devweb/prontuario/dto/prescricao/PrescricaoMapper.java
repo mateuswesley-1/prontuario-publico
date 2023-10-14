@@ -2,7 +2,7 @@ package com.devweb.prontuario.dto.prescricao;
 
 import org.modelmapper.ModelMapper;
 
-import com.devweb.prontuario.dto.BaseMapper;
+import com.devweb.prontuario.BaseMapper;
 import com.devweb.prontuario.entities.Precricao;
 import com.devweb.prontuario.services.MedicamentoService;
 

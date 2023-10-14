@@ -1,6 +1,6 @@
 package com.devweb.prontuario.dto.medico;
 
-import com.devweb.prontuario.dto.BaseMapper;
+import com.devweb.prontuario.BaseMapper;
 import com.devweb.prontuario.dto.Funcionario.FuncionarioMapper;
 import com.devweb.prontuario.dto.Funcionario.FuncionarioRequestDTO;
 import com.devweb.prontuario.entities.Funcionario;

@@ -1,6 +1,7 @@
 package com.devweb.prontuario.controllers;
 
 
+import com.devweb.prontuario.BaseController;
 import com.devweb.prontuario.dto.medico.MedicoMapper;
 import com.devweb.prontuario.dto.medico.MedicoRequestDTO;
 import com.devweb.prontuario.dto.medico.MedicoResponseDTO;

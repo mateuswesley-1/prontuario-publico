@@ -1,7 +1,6 @@
-package com.devweb.prontuario.repositories;
+package com.devweb.prontuario;
 
 
-import com.devweb.prontuario.entities.BaseEntity;
 import lombok.Data;
 
 import org.springframework.data.domain.Page;

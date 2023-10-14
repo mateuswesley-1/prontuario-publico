@@ -1,10 +1,10 @@
-package com.devweb.prontuario.controllers;
+package com.devweb.prontuario;
 
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.devweb.prontuario.repositories.BaseRepositoryJBDC;
+import com.devweb.prontuario.BaseRepositoryJBDC;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -15,10 +15,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.devweb.prontuario.dto.BaseMapper;
-import com.devweb.prontuario.dto.EntityRequestDto;
-import com.devweb.prontuario.dto.EntityResponseDTO;
-import com.devweb.prontuario.entities.BaseEntity;
+import com.devweb.prontuario.BaseMapper;
+import com.devweb.prontuario.EntityRequestDto;
+import com.devweb.prontuario.EntityResponseDTO;
+import com.devweb.prontuario.BaseEntity;
 import com.devweb.prontuario.services.BaseService;
 
 import jakarta.persistence.MappedSuperclass;

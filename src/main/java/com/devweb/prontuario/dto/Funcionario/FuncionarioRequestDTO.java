@@ -1,9 +1,8 @@
 package com.devweb.prontuario.dto.Funcionario;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
-import com.devweb.prontuario.dto.EntityRequestDto;
+import com.devweb.prontuario.EntityRequestDto;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

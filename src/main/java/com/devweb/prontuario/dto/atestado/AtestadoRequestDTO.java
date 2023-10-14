@@ -1,6 +1,6 @@
 package com.devweb.prontuario.dto.atestado;
 
-import com.devweb.prontuario.dto.EntityRequestDto;
+import com.devweb.prontuario.EntityRequestDto;
 
 import lombok.Data;
 

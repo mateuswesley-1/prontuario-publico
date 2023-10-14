@@ -1,4 +1,4 @@
-package com.devweb.prontuario.entities;
+package com.devweb.prontuario;
 
 import java.time.LocalDateTime;
 

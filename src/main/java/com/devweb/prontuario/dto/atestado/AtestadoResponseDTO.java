@@ -1,12 +1,8 @@
 package com.devweb.prontuario.dto.atestado;
 
 import com.devweb.prontuario.controllers.AtestadoController;
-import com.devweb.prontuario.dto.EntityResponseDTO;
+import com.devweb.prontuario.EntityResponseDTO;
 
-import com.devweb.prontuario.entities.Atestado;
-import jakarta.validation.constraints.NotBlank;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 

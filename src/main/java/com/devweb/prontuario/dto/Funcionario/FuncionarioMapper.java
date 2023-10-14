@@ -3,7 +3,7 @@ package com.devweb.prontuario.dto.Funcionario;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
-import com.devweb.prontuario.dto.BaseMapper;
+import com.devweb.prontuario.BaseMapper;
 import com.devweb.prontuario.entities.Funcionario;
 
 

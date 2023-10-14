@@ -1,8 +1,6 @@
-package com.devweb.prontuario.dto;
+package com.devweb.prontuario;
 
 import java.time.LocalDateTime;
-
-import com.devweb.prontuario.controllers.BaseController;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;

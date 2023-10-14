@@ -22,7 +22,10 @@ public class BaseTestContainers {
                 postgreSQLContainer.getJdbcUrl(),
                 postgreSQLContainer.getUsername(),
                 postgreSQLContainer.getPassword()
-        ).load();
+        )
+                .locations("classpath:db/migration/test_migrations")
+                .load();
+
         flyway.migrate();
         System.out.println (  );
     }
@@ -49,7 +52,7 @@ public class BaseTestContainers {
         return builder.build ();
     }
 
-    protected static NamedParameterJdbcTemplate getJbdcTemplate(){
+    public static NamedParameterJdbcTemplate getJbdcTemplate(){
         return new NamedParameterJdbcTemplate(BaseTestContainers.getDataSource ());
     }
 

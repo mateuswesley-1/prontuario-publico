@@ -1,5 +1,6 @@
 package com.devweb.prontuario.controllers;
 
+import com.devweb.prontuario.BaseController;
 import com.devweb.prontuario.repositories.MedicamentoRepository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,7 +13,7 @@ import com.devweb.prontuario.services.MedicamentoService;
 
 @RestController
 @RequestMapping("/medicamentos")
-public class MedicamentoController extends BaseController<Medicamento, MedicamentoRepository,MedicamentoService, MedicamentoRequestDTO, MedicamentoResponseDTO, MedicamentoMapper>{
+public class MedicamentoController extends BaseController<Medicamento, MedicamentoRepository,MedicamentoService, MedicamentoRequestDTO, MedicamentoResponseDTO, MedicamentoMapper> {
 
     public MedicamentoController(MedicamentoMapper mapper, MedicamentoService service) {
 

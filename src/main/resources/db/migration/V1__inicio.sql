@@ -84,3 +84,5 @@ CREATE TABLE prescricao_tb
     FOREIGN KEY (consulta_id) REFERENCES  consulta_tb (id)
 );
 
+
+

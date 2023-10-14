@@ -2,9 +2,7 @@ package com.devweb.prontuario.dto.medico;
 
 
 
-import com.devweb.prontuario.dto.EntityRequestDto;
-import com.devweb.prontuario.dto.Funcionario.FuncionarioRequestDTO;
-import jakarta.validation.constraints.NotBlank;
+import com.devweb.prontuario.EntityRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

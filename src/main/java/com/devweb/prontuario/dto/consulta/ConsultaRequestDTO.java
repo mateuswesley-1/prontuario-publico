@@ -2,7 +2,7 @@ package com.devweb.prontuario.dto.consulta;
 
 import java.util.List;
 
-import com.devweb.prontuario.dto.EntityRequestDto;
+import com.devweb.prontuario.EntityRequestDto;
 import com.devweb.prontuario.dto.atestado.AtestadoRequestDTO;
 import com.devweb.prontuario.dto.prescricao.PrescricaoRequestDTO;
 

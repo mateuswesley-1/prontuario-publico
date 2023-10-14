@@ -3,6 +3,7 @@ package com.devweb.prontuario.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.devweb.prontuario.BaseEntity;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.SQLDelete;
@@ -31,7 +32,7 @@ import lombok.Setter;
 @Setter
 @SQLDelete(sql = "UPDATE consulta_tb SET deleted_at = CURRENT_TIMESTAMP WHERE id=?")
 @Where(clause = "deleted_at is null")
-public class Consulta extends BaseEntity{
+public class Consulta extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "medico_id")

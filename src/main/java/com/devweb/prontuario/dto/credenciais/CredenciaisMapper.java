@@ -1,7 +1,6 @@
 package com.devweb.prontuario.dto.credenciais;
 
-import com.devweb.prontuario.dto.BaseMapper;
-import com.devweb.prontuario.dto.Funcionario.FuncionarioMapper;
+import com.devweb.prontuario.BaseMapper;
 import com.devweb.prontuario.entities.Credenciais;
 
 import org.modelmapper.ModelMapper;

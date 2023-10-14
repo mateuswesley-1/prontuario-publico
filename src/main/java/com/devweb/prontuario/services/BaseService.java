@@ -3,11 +3,11 @@ package com.devweb.prontuario.services;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-import com.devweb.prontuario.repositories.BaseRepositoryJBDC;
+import com.devweb.prontuario.BaseRepositoryJBDC;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.devweb.prontuario.entities.BaseEntity;
+import com.devweb.prontuario.BaseEntity;
 import com.devweb.prontuario.messages.Mensagens;
 
 import jakarta.persistence.EntityNotFoundException;

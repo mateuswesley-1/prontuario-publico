@@ -2,6 +2,7 @@ package com.devweb.prontuario.repositories;
 
 import java.util.Optional;
 
+import com.devweb.prontuario.BaseRepositoryJBDC;
 import com.devweb.prontuario.entities.Credenciais;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;

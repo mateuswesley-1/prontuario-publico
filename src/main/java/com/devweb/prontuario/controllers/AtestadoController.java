@@ -1,5 +1,6 @@
 package com.devweb.prontuario.controllers;
 
+import com.devweb.prontuario.BaseController;
 import com.devweb.prontuario.repositories.AtestadoRepository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

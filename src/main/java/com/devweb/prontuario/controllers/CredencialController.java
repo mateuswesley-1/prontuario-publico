@@ -1,11 +1,9 @@
 package com.devweb.prontuario.controllers;
 
-import com.devweb.prontuario.dto.EntityResponseDTO;
+import com.devweb.prontuario.BaseController;
 import com.devweb.prontuario.dto.credenciais.CredenciaisRequestDTO;
 import com.devweb.prontuario.dto.credenciais.CredenciaisResponseDTO;
 import com.devweb.prontuario.repositories.CredenciaisRepository;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,12 +16,12 @@ import com.devweb.prontuario.services.CredenciaisService;
 @RequestMapping("/credenciais")
 public class CredencialController
         extends BaseController<
-        Credenciais,
-        CredenciaisRepository,
-        CredenciaisService,
-        CredenciaisRequestDTO,
-        CredenciaisResponseDTO,
-        CredenciaisMapper> {
+                Credenciais,
+                CredenciaisRepository,
+                CredenciaisService,
+                CredenciaisRequestDTO,
+                CredenciaisResponseDTO,
+                CredenciaisMapper> {
     CredenciaisService service;
     CredenciaisMapper mapper;
 
