@@ -11,15 +11,9 @@ import lombok.Data;
 
 @Data
 public class ConsultaRequestDTO extends EntityRequestDto {
-
     private String idMedico;
-
     private String idPaciente;
-
     private String anamnese;
-
     private List<PrescricaoRequestDTO> prescricao;
-
     private AtestadoRequestDTO atestado;
-
 }

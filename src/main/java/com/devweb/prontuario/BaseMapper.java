@@ -9,14 +9,14 @@ import java.util.UUID;
 public class BaseMapper<
         T extends BaseEntity,
         E extends EntityRequestDto,
-        R extends EntityResponseDTO<?>> {
+        R extends EntityResponseDTO> {
 
     protected ModelMapper mapper;
 
     public BaseMapper(ModelMapper mapper){
         this.mapper = mapper;
     }
-    public  T requestDtoToEntity(E dto, Class<T> entityType){
+    public T requestDtoToEntity(E dto, Class<T> entityType){
         T entity = mapper.map(dto, entityType);
         entity.setCreatedAt(LocalDateTime.now());
         entity.setUpdatedAt(LocalDateTime.now());

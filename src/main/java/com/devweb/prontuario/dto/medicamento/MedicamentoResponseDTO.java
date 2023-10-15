@@ -7,12 +7,7 @@ import lombok.*;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class MedicamentoResponseDTO extends EntityResponseDTO<MedicamentoController> {
-
-    public MedicamentoResponseDTO(){
-        super(MedicamentoController.class);
-    }
-
+public class MedicamentoResponseDTO extends EntityResponseDTO {
     private String nome;
     private double dose;
 }

@@ -11,17 +11,11 @@ import lombok.*;
 
 @Getter
 @Setter
-public class FuncionarioResponseDTO extends EntityResponseDTO<FuncionarioController> {
-
-    public FuncionarioResponseDTO(){
-        super(FuncionarioController.class);
-    }
-
+public class FuncionarioResponseDTO extends EntityResponseDTO {
     private String CPF;
     private String nome;
     private LocalDate dataNascimento;
     private String endereco;
     private String email;
     private String cargo;
-
 }

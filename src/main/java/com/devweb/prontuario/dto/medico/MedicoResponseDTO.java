@@ -10,11 +10,7 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-public class MedicoResponseDTO extends EntityResponseDTO<MedicoController> {
-    public MedicoResponseDTO(){
-        super(MedicoController.class);
-    }
-
+public class MedicoResponseDTO extends EntityResponseDTO {
     private long crm;
     private String especialidade;
     private String CPF;

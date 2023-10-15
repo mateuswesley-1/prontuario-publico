@@ -23,8 +23,6 @@ import lombok.Setter;
 @Table(name="prescricao_tb")
 @AllArgsConstructor
 @NoArgsConstructor
-@SQLDelete(sql = "UPDATE prescricao_tb SET deleted_at = CURRENT_TIMESTAMP WHERE id=?")
-@Where(clause = "deleted_at is null")
 public class Precricao extends BaseEntity {
     @Min(1)
     @Max(60)
@@ -34,11 +32,13 @@ public class Precricao extends BaseEntity {
     @Max(48)
     private int frequencia_horas;
 
-    @ManyToOne  
-    @JoinColumn(name = "medicamento_id")
     @Setter
     @Getter
-    private Medicamento medicamento;
+    private String medicamento_id;
+
+    @Setter
+    @Getter
+    private String consulta_id;
 
     public int getFrequenciaHoras() {
         return frequencia_horas;

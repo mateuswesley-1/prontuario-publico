@@ -27,11 +27,9 @@ import lombok.Setter;
 @Where(clause = "deleted_at is null")
 public class Medico extends BaseEntity {
 
-    @JsonIgnore
-    @OneToOne
+
     @NotNull
-    @Cascade(CascadeType.ALL)
-    private Funcionario funcionario;
+    private String funcionario;
 
     @NotNull
     private int crm;

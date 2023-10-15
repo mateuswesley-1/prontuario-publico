@@ -30,16 +30,15 @@ public abstract class BaseController<T extends BaseEntity,
                                      Repo extends BaseRepositoryJBDC<T>,
                                      S extends BaseService<T, Repo>,
                                      E extends EntityRequestDto,
-                                     R extends EntityResponseDTO<?>,
+                                     R extends EntityResponseDTO,
                                      M extends BaseMapper<T, E, R>
                                      > {
 
 
-    private M mapper;
-    private S service;
-    private Class<T> entityType;
-
-    private Class<R> entityResponseDTOType;
+    protected M mapper;
+    protected S service;
+    protected Class<T> entityType;
+    protected Class<R> entityResponseDTOType;
     public BaseController(M mapper, S service, Class<T> entityType, Class<R> entityResponseDTOType){
         this.mapper = mapper;
         this.service = service;
@@ -61,7 +60,6 @@ public abstract class BaseController<T extends BaseEntity,
     public ResponseEntity<R> getById(@PathVariable String id){
         T response = service.getById(id);
         R responseDTO = mapper.entityToResponseDto(response, entityResponseDTOType);
-        responseDTO.addLinks();
         return ResponseEntity.ok(responseDTO);
     }
 
@@ -79,12 +77,10 @@ public abstract class BaseController<T extends BaseEntity,
     }
 
     @PatchMapping("/{id}")
-    public EntityResponseDTO<?> patchOrUpdate(@PathVariable String id, @RequestBody E dto){
+    public EntityResponseDTO patchOrUpdate(@PathVariable String id, @RequestBody E dto){
         T entity = mapper.requestDtoToEntity(dto, entityType);
         service.update(id, entity);
-        R responseDTO = mapper.entityToResponseDto(service.getById(id), entityResponseDTOType);
-        responseDTO.addLinks();
-        return responseDTO;
+        return mapper.entityToResponseDto(service.getById(id), entityResponseDTOType);
     }
 
     @PutMapping("/{id}")

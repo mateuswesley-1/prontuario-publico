@@ -13,11 +13,7 @@ import lombok.*;
 
 @Getter
 @Setter
-public class ConsultaResponseDTO extends EntityResponseDTO<ConsultaController> {
-    public ConsultaResponseDTO(){
-        super(ConsultaController.class);
-    }
-
+public class ConsultaResponseDTO extends EntityResponseDTO {
     private MedicoResponseDTO medico;
     private FuncionarioResponseDTO paciente;
     private String anamnese;

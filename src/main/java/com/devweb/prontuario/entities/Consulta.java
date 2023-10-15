@@ -34,28 +34,17 @@ import lombok.Setter;
 @Where(clause = "deleted_at is null")
 public class Consulta extends BaseEntity {
 
-    @ManyToOne
-    @JoinColumn(name = "medico_id")
-    @NotNull(message = "O campo médico não pode ser null.")
-    private Medico medico;
 
-    @ManyToOne
-    @JoinColumn(name = "paciente_id")
+    @NotBlank(message = "O campo médico não pode estar em branco.")
+    private String medico_id;
+
     @NotNull(message = "O campo paciente não pode estar em branco.")
-    private Funcionario paciente;
+    private String paciente_id;
 
     @NotBlank(message = "O campo anamnese não pode estar em branco.")
-    @Cascade(CascadeType.ALL)
     private String anamnese;
 
-    @OneToMany
-    @JoinColumn(name = "consulta_id")
-    @Cascade(CascadeType.ALL)
-    private List<Precricao> prescricao = new ArrayList<>();
-
-    @OneToOne
-    @JoinColumn(name = "atestado_id")
     @Cascade(CascadeType.PERSIST)
-    private Atestado atestado;
+    private String atestado_id;
 
 }

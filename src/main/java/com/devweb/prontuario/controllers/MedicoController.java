@@ -2,7 +2,7 @@ package com.devweb.prontuario.controllers;
 
 
 import com.devweb.prontuario.BaseController;
-import com.devweb.prontuario.dto.medico.MedicoMapper;
+import com.devweb.prontuario.BaseMapper;
 import com.devweb.prontuario.dto.medico.MedicoRequestDTO;
 import com.devweb.prontuario.dto.medico.MedicoResponseDTO;
 import com.devweb.prontuario.entities.Medico;
@@ -13,9 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/medicos")
-public class MedicoController extends BaseController<Medico, MedicoRepository, MedicoService, MedicoRequestDTO, MedicoResponseDTO, MedicoMapper> {
-    public MedicoController(MedicoMapper mapper, MedicoService service){
-
+public class MedicoController extends BaseController<Medico, MedicoRepository, MedicoService, MedicoRequestDTO, MedicoResponseDTO, BaseMapper<Medico, MedicoRequestDTO, MedicoResponseDTO>> {
+    public MedicoController(BaseMapper<Medico, MedicoRequestDTO, MedicoResponseDTO> mapper, MedicoService service){
         super(mapper, service, Medico.class, MedicoResponseDTO.class);
     }
 }

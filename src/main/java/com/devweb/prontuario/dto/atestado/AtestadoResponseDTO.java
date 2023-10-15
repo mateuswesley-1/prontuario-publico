@@ -9,11 +9,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AtestadoResponseDTO extends EntityResponseDTO<AtestadoController> {
-
-    public AtestadoResponseDTO(){
-        super(AtestadoController.class);
-    }
+public class AtestadoResponseDTO extends EntityResponseDTO{
+    private String id;
     private int duracao;
     private String descricao;
 }

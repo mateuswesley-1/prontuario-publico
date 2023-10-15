@@ -16,17 +16,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FuncionarioRequestDTO extends EntityRequestDto {
-
     private String CPF;
-    
     private String nome;
-
     private LocalDate dataNascimento;
-
     private String endereco;
-
-    private String email;   
-
+    private String email;
     private String cargo;
-
 }

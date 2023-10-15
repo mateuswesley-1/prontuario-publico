@@ -17,7 +17,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MedicoRequestDTO extends EntityRequestDto {
-
     private long crm;
     private String especialidade;
     private String CPF;
@@ -25,6 +24,5 @@ public class MedicoRequestDTO extends EntityRequestDto {
     private LocalDate dataNascimento;
     private String endereco;
     private String email;
-
 }
 

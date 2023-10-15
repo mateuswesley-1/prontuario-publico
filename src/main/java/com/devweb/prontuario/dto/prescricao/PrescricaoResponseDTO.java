@@ -14,11 +14,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = true)
 @Getter
 @Setter
-public class PrescricaoResponseDTO extends EntityResponseDTO<PrescricaoController> {
-    public PrescricaoResponseDTO(){
-        super(PrescricaoController.class);
-    }
-
+public class PrescricaoResponseDTO extends EntityResponseDTO {
     private int qtdDias;
     private int frequenciaHoras;
     private MedicamentoResponseDTO medicamento;
