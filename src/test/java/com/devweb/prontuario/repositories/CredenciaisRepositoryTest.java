@@ -22,8 +22,6 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CredenciaisRepositoryTest extends BaseTestContainers{
-
-
     private CredenciaisRepository underTest;
     private NamedParameterJdbcTemplate template;
     private BaseMapper<Credenciais, CredenciaisRequestDTO, CredenciaisResponseDTO> credenciaisMapper;
@@ -71,7 +69,6 @@ class CredenciaisRepositoryTest extends BaseTestContainers{
         assertEquals ( "Esse método não é permitido para um objeto da classe " + Credenciais.class, throwable.getMessage () );
 
     }
-
     // Deve ser possível se cadastrar se o usuário for válido.
     @Test
     void saveShouldCreateCredentialsIfUserValid(){
@@ -94,25 +91,6 @@ class CredenciaisRepositoryTest extends BaseTestContainers{
         assertEquals ( username, result.get ().getUsername () );
     }
     @Test
-    void saveShouldNotCreateCredentialsIfUserInvalid() {
-        //Given
-        String username = "mateus";
-        String password = "mateus";
-        CredenciaisRequestDTO dto = new CredenciaisRequestDTO ();
-        dto.setUsername ( username );
-        dto.setPassword ( password );
-
-        Credenciais credenciais = this.credenciaisMapper.requestDtoToEntity ( dto, Credenciais.class);
-
-        //When
-        this.underTest.save (credenciais);
-
-        Optional<Credenciais> result = getCredenciais ( "user_errado" );
-
-        //Then
-        assertTrue(result.isEmpty ());
-        }
-    @Test
     void saveShouldNotCreateCredentialsIfUserNotUnique() {
         //Given
         String username = "user_test_3";
@@ -133,7 +111,21 @@ class CredenciaisRepositoryTest extends BaseTestContainers{
     }
     @Test
     void EntityShouldNotBePresentWhenDeleted() {
+        //Given
+        String username = "fernando";
+        String password = "fernando";
+        CredenciaisRequestDTO dto = new CredenciaisRequestDTO ();
+        dto.setUsername ( username );
+        dto.setPassword ( password );
 
+        Credenciais credenciais = this.credenciaisMapper.requestDtoToEntity ( dto, Credenciais.class);
+        this.underTest.save ( credenciais );
+
+        //When
+        this.underTest.delete (this.getCredenciais ( username ).get ().getId ());
+
+        //Then
+        assertTrue(this.getCredenciais ( username ).isEmpty ());
     }
     @NotNull
     private Optional<Credenciais> getCredenciais(String username) {
@@ -145,6 +137,5 @@ class CredenciaisRepositoryTest extends BaseTestContainers{
                 .query(sql, rowMapper, username )
                 .stream()
                 .findFirst();
-
     }
 }

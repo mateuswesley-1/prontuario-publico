@@ -11,7 +11,7 @@ import lombok.Setter;
 @Component
 @AllArgsConstructor
 @NoArgsConstructor
-public class Precricao extends BaseEntity {
+public class Prescricao extends BaseEntity {
     private int qtd_dias;
     private int frequencia_horas;
 

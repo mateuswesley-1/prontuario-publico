@@ -5,14 +5,14 @@ import com.devweb.prontuario.BaseController;
 import com.devweb.prontuario.BaseMapper;
 import com.devweb.prontuario.dto.prescricao.PrescricaoRequestDTO;
 import com.devweb.prontuario.dto.prescricao.PrescricaoResponseDTO;
-import com.devweb.prontuario.entities.Precricao;
-import com.devweb.prontuario.repositories.PrecricaoRepository;
+import com.devweb.prontuario.entities.Prescricao;
+import com.devweb.prontuario.repositories.PrescricaoRepository;
 import com.devweb.prontuario.services.PrecricaoService;
-public class PrescricaoController extends BaseController<Precricao, PrecricaoRepository,PrecricaoService, PrescricaoRequestDTO, PrescricaoResponseDTO, BaseMapper<Precricao, PrescricaoRequestDTO, PrescricaoResponseDTO>> {
+public class PrescricaoController extends BaseController<Prescricao, PrescricaoRepository,PrecricaoService, PrescricaoRequestDTO, PrescricaoResponseDTO, BaseMapper<Prescricao, PrescricaoRequestDTO, PrescricaoResponseDTO>> {
 
-    public PrescricaoController(BaseMapper<Precricao, PrescricaoRequestDTO, PrescricaoResponseDTO> mapper, PrecricaoService service) {
+    public PrescricaoController(BaseMapper<Prescricao, PrescricaoRequestDTO, PrescricaoResponseDTO> mapper, PrecricaoService service) {
 
-        super(mapper, service, Precricao.class, PrescricaoResponseDTO.class);
+        super(mapper, service, Prescricao.class, PrescricaoResponseDTO.class);
     }
 
 }

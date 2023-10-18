@@ -1,19 +1,19 @@
 package com.devweb.prontuario.services;
 
-import com.devweb.prontuario.repositories.PrecricaoRepository;
+import com.devweb.prontuario.repositories.PrescricaoRepository;
 import org.springframework.stereotype.Service;
 
-import com.devweb.prontuario.entities.Precricao;
+import com.devweb.prontuario.entities.Prescricao;
 
 @Service
-public class PrecricaoService extends BaseService<Precricao, PrecricaoRepository>{
+public class PrecricaoService extends BaseService<Prescricao, PrescricaoRepository>{
 
-    protected PrecricaoService(PrecricaoRepository repository) {
-        super(repository, Precricao.class);
+    protected PrecricaoService(PrescricaoRepository repository) {
+        super(repository, Prescricao.class);
     }
 
     @Override
-    void patch(Precricao novo, Precricao atual) {
+    void patch(Prescricao novo, Prescricao atual) {
         if(novo.getFrequenciaHoras() != 0) atual.setFrequenciaHoras(novo.getFrequenciaHoras());
         if(novo.getQtdDias() != 0) atual.setQtdDias(novo.getQtdDias());
     }
