@@ -2,28 +2,17 @@ package com.devweb.prontuario;
 
 import java.time.LocalDateTime;
 
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+
 import lombok.Getter;
 import lombok.Setter;
 
-
-
-@MappedSuperclass
+@Getter
+@Setter
 public abstract class BaseEntity {
-    @Getter
-    @Setter
-    @Id
-    protected String id;
-    protected LocalDateTime deleted_at;
-    protected LocalDateTime updated_at;
-    protected LocalDateTime created_at;
 
-    public void setCreatedAt(LocalDateTime time){
-        this.created_at = time;
-    }
+    private String id;
+    private LocalDateTime deleted_at;
+    private LocalDateTime updated_at;
+    private LocalDateTime created_at;
 
-    public void setUpdatedAt(LocalDateTime time){
-        this.updated_at = time;
-    }
 }

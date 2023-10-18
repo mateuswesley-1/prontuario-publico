@@ -15,10 +15,9 @@ public class ConsultaService extends BaseService<Consulta, ConsultaRepository> {
     @Override
     void patch(Consulta novo, Consulta atual) {
         if(novo.getAnamnese() != null) atual.setAnamnese(novo.getAnamnese());
-        if(novo.getAtestado() != null) atual.setAtestado(novo.getAtestado());
-        if(novo.getMedico() != null) atual.setMedico(novo.getMedico());
-        if(novo.getPaciente() != null) atual.setPaciente(novo.getPaciente());
-        if(novo.getPrescricao() != null) atual.setPrescricao(novo.getPrescricao());
+        if(novo.getAtestado_id () != null) atual.setAtestado_id (novo.getAtestado_id ());
+        if(novo.getMedico_id () != null) atual.setMedico_id (novo.getMedico_id ());
+        if(novo.getPaciente_id () != null) atual.setPaciente_id (novo.getPaciente_id ());
     }
     
 }

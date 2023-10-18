@@ -16,7 +16,6 @@ public class AuthController {
     private final TokenService service;
     private final AuthenticationManager authenticationManager;
 
-
     public AuthController(TokenService service, AuthenticationManager authenticationManager){
         this.service = service;
         this.authenticationManager = authenticationManager;

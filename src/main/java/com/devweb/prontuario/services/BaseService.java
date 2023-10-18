@@ -4,14 +4,12 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 import com.devweb.prontuario.BaseRepositoryJBDC;
+import com.devweb.prontuario.exceptions.CustomExceptions.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.devweb.prontuario.BaseEntity;
 import com.devweb.prontuario.messages.Mensagens;
-
-import jakarta.persistence.EntityNotFoundException;
-
 
 public class BaseService<T extends BaseEntity, Repo extends BaseRepositoryJBDC<T>> {
 
@@ -30,12 +28,12 @@ public class BaseService<T extends BaseEntity, Repo extends BaseRepositoryJBDC<T
     public T getById(String id){
         Optional<T> resultado = repository.findById(id);
         if (resultado.isPresent()) return resultado.get(); 
-        throw new EntityNotFoundException(Mensagens.NOT_FOUND.formatar(entityType.getName()));
+        throw new EntityNotFoundException (Mensagens.NOT_FOUND.formatar(entityType.getName()));
     }
 
     public void add(T entityInstance){
-        entityInstance.setCreatedAt(LocalDateTime.now());
-        entityInstance.setUpdatedAt(LocalDateTime.now());
+        entityInstance.setCreated_at (LocalDateTime.now());
+        entityInstance.setUpdated_at (LocalDateTime.now());
         repository.save(entityInstance);
     }
 
@@ -52,7 +50,7 @@ public class BaseService<T extends BaseEntity, Repo extends BaseRepositoryJBDC<T
     public void update(String id, T newInstance) {
         Optional<T> response = repository.findById(id);
         if(response.isPresent()) {
-            response.get().setUpdatedAt(LocalDateTime.now());
+            response.get().setUpdated_at(LocalDateTime.now());
             T actualInstance = response.get();
             this.patch(newInstance, actualInstance);
             repository.save(actualInstance);

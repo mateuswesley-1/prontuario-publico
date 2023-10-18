@@ -4,7 +4,6 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.devweb.prontuario.BaseRepositoryJBDC;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -15,21 +14,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.devweb.prontuario.BaseMapper;
-import com.devweb.prontuario.EntityRequestDto;
-import com.devweb.prontuario.EntityResponseDTO;
-import com.devweb.prontuario.BaseEntity;
 import com.devweb.prontuario.services.BaseService;
 
-import jakarta.persistence.MappedSuperclass;
 
 
-@MappedSuperclass
 @RestController
 public abstract class BaseController<T extends BaseEntity,
                                      Repo extends BaseRepositoryJBDC<T>,
                                      S extends BaseService<T, Repo>,
-                                     E extends EntityRequestDto,
+                                     E extends EntityRequestDTO,
                                      R extends EntityResponseDTO,
                                      M extends BaseMapper<T, E, R>
                                      > {

@@ -15,7 +15,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 @NoArgsConstructor
 public abstract class EntityResponseDTO {
     private String id;
-    private LocalDateTime deletedAt;
-    private LocalDateTime updatedAt;
-    private LocalDateTime createdAt;
+    private LocalDateTime deleted_at;
+    private LocalDateTime updated_at;
+    private LocalDateTime created_at;
 }

@@ -2,7 +2,7 @@ package com.devweb.prontuario.dto.Funcionario;
 
 import java.time.LocalDate;
 
-import com.devweb.prontuario.EntityRequestDto;
+import com.devweb.prontuario.EntityRequestDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -15,7 +15,7 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class FuncionarioRequestDTO extends EntityRequestDto {
+public class FuncionarioRequestDTO extends EntityRequestDTO {
     private String CPF;
     private String nome;
     private LocalDate dataNascimento;
