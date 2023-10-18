@@ -4,6 +4,8 @@ import java.util.Optional;
 
 import com.devweb.prontuario.BaseRepositoryJBDC;
 import com.devweb.prontuario.entities.Credenciais;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -22,5 +24,17 @@ public class CredenciaisRepository extends BaseRepositoryJBDC<Credenciais> {
                 .stream()
                 .findFirst();
     }
+
+    @Override
+    public Optional<Credenciais> findById(String id) {
+        throw new UnsupportedOperationException ( "Esse método não é permitido para um objeto da classe " + Credenciais.class );
+    }
+
+    @Override
+    public Page<Credenciais> findAll(Pageable pageable) {
+        throw new UnsupportedOperationException ( "Esse método não é permitido para um objeto da classe " + Credenciais.class );
+    }
+
+
 }
 
