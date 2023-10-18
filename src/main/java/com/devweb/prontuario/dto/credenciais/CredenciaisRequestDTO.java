@@ -1,12 +1,12 @@
 package com.devweb.prontuario.dto.credenciais;
 
-import com.devweb.prontuario.EntityRequestDto;
+import com.devweb.prontuario.EntityRequestDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class CredenciaisRequestDTO extends EntityRequestDto {
+public class CredenciaisRequestDTO extends EntityRequestDTO {
     private String username;
     private String password;
 }

@@ -3,9 +3,6 @@ package com.devweb.prontuario.entities;
 import java.util.Collection;
 
 import com.devweb.prontuario.BaseEntity;
-import jakarta.persistence.*;
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -15,18 +12,13 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
 
-@Entity
 @Component
-@Table(name = "credenciais_tb")
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
-@SQLDelete(sql = "UPDATE credenciais_tb SET deleted_at = CURRENT_TIMESTAMP WHERE id=?")
-@Where(clause = "deleted_at is null")
 public class Credenciais extends BaseEntity implements UserDetails  {
 
-    @Column(unique = true)
     public String username;
     public String password;
 

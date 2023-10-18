@@ -2,7 +2,7 @@ package com.devweb.prontuario.dto.medico;
 
 
 
-import com.devweb.prontuario.EntityRequestDto;
+import com.devweb.prontuario.EntityRequestDTO;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -16,7 +16,7 @@ import java.time.LocalDate;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class MedicoRequestDTO extends EntityRequestDto {
+public class MedicoRequestDTO extends EntityRequestDTO {
     private long crm;
     private String especialidade;
     private String CPF;

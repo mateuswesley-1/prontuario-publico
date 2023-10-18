@@ -23,7 +23,7 @@ public class BaseTestContainers {
                 postgreSQLContainer.getUsername(),
                 postgreSQLContainer.getPassword()
         )
-                .locations("classpath:db/migration/test_migrations")
+                .locations("classpath:db/test_migration")
                 .load();
 
         flyway.migrate();
