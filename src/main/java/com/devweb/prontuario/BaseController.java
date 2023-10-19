@@ -14,9 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.devweb.prontuario.services.BaseService;
-
-
 
 @RestController
 public abstract class BaseController<T extends BaseEntity,
@@ -40,7 +37,7 @@ public abstract class BaseController<T extends BaseEntity,
     }
 
     @GetMapping
-    public ResponseEntity<Page<R>> getAll(@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
+    public ResponseEntity<Page<R>> getAll(@PageableDefault( sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
         Page<T> page = service.getAll(pageable);
         List<T> listaEntity = page.getContent();
         List<R> dtoList = listaEntity.stream()

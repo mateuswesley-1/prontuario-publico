@@ -1,17 +1,16 @@
-package com.devweb.prontuario.services;
+package com.devweb.prontuario;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-import com.devweb.prontuario.BaseRepositoryJBDC;
+
 import com.devweb.prontuario.exceptions.CustomExceptions.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.devweb.prontuario.BaseEntity;
 import com.devweb.prontuario.messages.Mensagens;
 
-public class BaseService<T extends BaseEntity, Repo extends BaseRepositoryJBDC<T>> {
+public abstract class BaseService<T extends BaseEntity, Repo extends BaseRepositoryJBDC<T>> {
 
     protected final Repo repository;
     protected final Class<T> entityType;
@@ -54,11 +53,12 @@ public class BaseService<T extends BaseEntity, Repo extends BaseRepositoryJBDC<T
             T actualInstance = response.get();
             this.patch(newInstance, actualInstance);
             repository.save(actualInstance);
+        } else {
+            throw new EntityNotFoundException(Mensagens.NOT_FOUND.formatar(entityType.getName()));
         }
-        throw new EntityNotFoundException(Mensagens.NOT_FOUND.formatar(entityType.getName()));
     }
 
-    void patch(T newInstance, T actualInstance){
+    public void patch(T newInstance, T actualInstance){
 
-    };
+    }
 }

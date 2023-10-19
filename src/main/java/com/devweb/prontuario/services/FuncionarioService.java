@@ -1,12 +1,13 @@
 package com.devweb.prontuario.services;
 
+import com.devweb.prontuario.BaseService;
 import org.springframework.stereotype.Service;
 
 import com.devweb.prontuario.entities.Funcionario;
 import com.devweb.prontuario.repositories.FuncionarioRepository;
 
 @Service
-public class FuncionarioService extends BaseService<Funcionario, FuncionarioRepository>{
+public class FuncionarioService extends BaseService<Funcionario, FuncionarioRepository> {
     public FuncionarioService(FuncionarioRepository repository) {
         super(repository, Funcionario.class);
     }
