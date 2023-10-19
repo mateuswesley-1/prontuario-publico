@@ -49,22 +49,21 @@ public abstract class BaseRepositoryJBDC<T extends BaseEntity> {
         return new PageImpl<>(result, pageable, result.size());
     }
 
-    public void save(T entityInstance){
+    public Optional<T> save(T entityInstance){
         this.columns = new StringBuilder();
         this.placeHolders = new StringBuilder();
         KeyHolder keyHolder = new GeneratedKeyHolder();
         this.ClassFields(entityInstance);
         StringBuilder sql = new StringBuilder();
         sql
-            .append("INSERT INTO ")
-            .append(this.NomeTabela())
-            .append(" (")
-            .append(columns)
-            .append(") ")
-            .append(" VALUES (")
-            .append(placeHolders)
-            .append(")");
+            .append("INSERT INTO ").append(this.NomeTabela())
+            .append(" (").append(columns).append(") ")
+            .append(" VALUES (").append(placeHolders)
+            .append(")")
+            .append ( " RETURNING" ).append ( " id;" );
         jdbcTemplate.update(sql.toString(), this.paramSource, keyHolder);
+        entityInstance.setId ( keyHolder.getKeyAs ( String.class ) );
+        return Optional.of(entityInstance);
      }
 
      public void delete(String id){

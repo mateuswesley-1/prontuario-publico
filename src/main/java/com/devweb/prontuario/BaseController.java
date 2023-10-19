@@ -56,8 +56,8 @@ public abstract class BaseController<T extends BaseEntity,
     @PostMapping
     public ResponseEntity<Object> create(@RequestBody E dto){
         T entity = mapper.requestDtoToEntity(dto, entityType);
-        service.add(entity);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        T created = service.create(entity);
+        return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
     @DeleteMapping("/{id}")

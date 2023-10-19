@@ -110,7 +110,7 @@ class AtestadoServiceTest {
         Atestado expected = new Atestado ( 10, "atestado teste" );
 
         //When
-        this.underTest.add ( expected );
+        this.underTest.create ( expected );
 
         //Then
         verify ( this.repository ).save ( expected );

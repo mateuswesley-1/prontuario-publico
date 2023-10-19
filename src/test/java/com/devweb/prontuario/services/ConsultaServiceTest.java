@@ -132,7 +132,7 @@ class ConsultaServiceTest {
         );
 
         //When
-        this.underTest.add ( expected );
+        this.underTest.create ( expected );
 
         //Then
         verify ( this.repository ).save ( expected );

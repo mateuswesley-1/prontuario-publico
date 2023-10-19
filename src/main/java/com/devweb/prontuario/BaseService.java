@@ -30,10 +30,13 @@ public abstract class BaseService<T extends BaseEntity, Repo extends BaseReposit
         throw new EntityNotFoundException (Mensagens.NOT_FOUND.formatar(entityType.getName()));
     }
 
-    public void add(T entityInstance){
+    public T create(T entityInstance){
         entityInstance.setCreated_at (LocalDateTime.now());
         entityInstance.setUpdated_at (LocalDateTime.now());
-        repository.save(entityInstance);
+        Optional<T> result = repository.save(entityInstance);
+
+        if(result.isPresent ()) return result.get ();
+        throw new RuntimeException ( "Nao foi possivel criar o objeto fornecido" );
     }
 
     public void delete(String id){

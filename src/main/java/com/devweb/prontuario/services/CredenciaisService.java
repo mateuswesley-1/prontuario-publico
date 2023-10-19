@@ -5,11 +5,14 @@ package com.devweb.prontuario.services;
 import com.devweb.prontuario.BaseService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.devweb.prontuario.entities.Credenciais;
 import com.devweb.prontuario.repositories.CredenciaisRepository;
+
+import java.util.Optional;
 
 
 @Service
@@ -28,7 +31,12 @@ public class CredenciaisService extends BaseService<Credenciais, CredenciaisRepo
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UnsupportedOperationException {
-        throw new UnsupportedOperationException("Método não permitido.");
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Optional<Credenciais> credenciais = repository.findByUsername(username);
+        if (credenciais.isPresent()){
+            return credenciais.get();
+        }else{
+            throw new UsernameNotFoundException("Usuario não cadastrado com username "+username);
+        }
     }
 }
