@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
@@ -138,11 +139,24 @@ class FuncionarioServiceTest {
                 "cargo"
         );
 
+        Funcionario result = new Funcionario (
+                expected.getCpf (),
+                expected.getNome (),
+                expected.getDataNascimento (),
+                expected.getEndereco (),
+                expected.getEmail (),
+                expected.getCargo ()
+        );
+
+        result.setId ( UUID.randomUUID ().toString () );
+        when( this.repository.save ( expected )).thenReturn ( Optional.of(result) );
+
         //When
-        this.underTest.create ( expected );
+        Funcionario serviceResult = this.underTest.create ( expected );
 
         //Then
         verify ( this.repository ).save ( expected );
+        assertEquals ( result, serviceResult );
 
     }
     @Test

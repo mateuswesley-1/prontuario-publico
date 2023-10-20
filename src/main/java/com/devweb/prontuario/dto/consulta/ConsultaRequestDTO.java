@@ -5,8 +5,10 @@ import java.util.List;
 import com.devweb.prontuario.EntityRequestDTO;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class ConsultaRequestDTO extends EntityRequestDTO {
     private String idMedico;

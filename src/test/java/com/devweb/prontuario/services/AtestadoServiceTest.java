@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
@@ -109,11 +110,21 @@ class AtestadoServiceTest {
         //Given
         Atestado expected = new Atestado ( 10, "atestado teste" );
 
+
+        Atestado result = new Atestado (
+                expected.getDuracao (),
+                expected.getDescricao ()
+        );
+
+        result.setId ( UUID.randomUUID ().toString () );
+        when( this.repository.save ( expected )).thenReturn ( Optional.of(result) );
+
         //When
-        this.underTest.create ( expected );
+        Atestado serviceResult = this.underTest.create ( expected );
 
         //Then
         verify ( this.repository ).save ( expected );
+        assertEquals ( result, serviceResult );
 
     }
     @Test

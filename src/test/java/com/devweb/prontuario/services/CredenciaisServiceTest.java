@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -70,20 +71,24 @@ class CredenciaisServiceTest {
     @Test
     void addShouldPassObjectToRepository() {
         //Given
-        Credenciais credenciais = new Credenciais ();
-        credenciais.setUsername ( "mateus_wesley_medeiros" );
-        credenciais.setPassword ( "mateus" );
-        when( this.encoder.encode ( credenciais.getPassword () )).thenReturn ( "senha_criptografada" );
+        Credenciais expected = new Credenciais ();
+        expected.setUsername ( "mateus_wesley_medeiros" );
+        expected.setPassword ( "mateus" );
+        when( this.encoder.encode ( expected.getPassword () )).thenReturn ( "senha_criptografada" );
 
+        Credenciais result = new Credenciais ();
+        result.setUsername ( expected.getUsername () );
+        result.setPassword ( expected.getPassword ( ) );
+        result.setId ( UUID.randomUUID ().toString () );
+
+        when( this.repository.save ( expected )).thenReturn ( Optional.of(result) );
 
         //When
-        this.underTest.add ( credenciais );
+        Credenciais serviceResult = this.underTest.create ( expected );
 
-        // Then
-        verify ( this.encoder ).encode ( "mateus" );
-        verify ( this.repository ).save ( credenciais );
-
-
+        //Then
+        verify ( this.repository ).save ( expected );
+        assertEquals ( result, serviceResult );
 
     }
     @Test

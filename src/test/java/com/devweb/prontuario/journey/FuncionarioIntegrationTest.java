@@ -11,6 +11,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -46,7 +47,7 @@ public class FuncionarioIntegrationTest {
         dto.setNome ( "nome_teste" );
         dto.setCargo ( "cargo_teste" );
         dto.setCPF ( "cpf_test" );
-        dto.setEmail ( "email_test" );
+        dto.setEmail ( "email_test"  + UUID.randomUUID ( ));
         dto.setEndereco ( "rua teste" );
         dto.setDataNascimento ( LocalDate.now ( ) );
 

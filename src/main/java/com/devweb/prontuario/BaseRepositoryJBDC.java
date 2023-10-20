@@ -50,8 +50,8 @@ public abstract class BaseRepositoryJBDC<T extends BaseEntity> {
     }
 
     public Optional<T> save(T entityInstance){
-        this.columns = new StringBuilder();
-        this.placeHolders = new StringBuilder();
+        columns = new StringBuilder();
+        placeHolders = new StringBuilder();
         KeyHolder keyHolder = new GeneratedKeyHolder();
         this.ClassFields(entityInstance);
         StringBuilder sql = new StringBuilder();

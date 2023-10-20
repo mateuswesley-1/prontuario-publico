@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
@@ -121,7 +122,7 @@ class PrescricaoServiceTest {
 
     // add : Caso de teste 1: objeto deve ser passado corretamente para o repositório
     @Test
-    void addShouldPassObjectToRepository() {
+    void addShouldPassObjectToRepositoryAndReturnObjWithId() {
         //Given
         Prescricao expected = new Prescricao (
                 10,
@@ -130,12 +131,20 @@ class PrescricaoServiceTest {
                 "consulta_id"
         );
 
+        Prescricao result = new Prescricao (
+                expected.getQtdDias (),
+                expected.getFrequenciaHoras (),
+                expected.getMedicamento_id (),
+                expected.getConsulta_id ()
+        );
+        result.setId ( UUID.randomUUID ().toString () );
+        when( this.repository.save ( expected )).thenReturn ( Optional.of(result) );
         //When
-        this.underTest.create ( expected );
+        Prescricao serviceResult = this.underTest.create ( expected );
 
         //Then
         verify ( this.repository ).save ( expected );
-
+        assertEquals ( result, serviceResult );
     }
     @Test
     void delete() {

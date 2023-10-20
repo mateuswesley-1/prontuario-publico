@@ -1,4 +1,9 @@
 #!/bin/sh
+export DATABASE_HOST=localhost
+export DATABASE_PORT=5331
+export DATABASE_NAME=prontuario
+export DATABASE_USERNAME=postgres
+export DATABASE_PASSWORD=password
 # ----------------------------------------------------------------------------
 # Licensed to the Apache Software Foundation (ASF) under one
 # or more contributor license agreements.  See the NOTICE file

@@ -3,8 +3,10 @@ package com.devweb.prontuario.dto.prescricao;
 import com.devweb.prontuario.EntityRequestDTO;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class PrescricaoRequestDTO extends EntityRequestDTO {
     private int qtdDias;

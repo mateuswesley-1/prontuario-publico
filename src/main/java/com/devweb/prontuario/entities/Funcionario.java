@@ -14,16 +14,24 @@ import lombok.Setter;
 @Component
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+
 @Builder
 public class Funcionario extends BaseEntity {
-
+    @Getter
+    @Setter
     public String cpf;
+    @Getter
+    @Setter
     private String nome;
     private LocalDate data_nascimento;
+    @Getter
+    @Setter
     private String endereco;
+    @Getter
+    @Setter
     private String email;
+    @Getter
+    @Setter
     private String cargo;
 
     public void setDataNascimento(LocalDate time){

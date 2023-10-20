@@ -1,6 +1,7 @@
 package com.devweb.prontuario;
 
-import org.flywaydb.core.Flyway;
+import com.devweb.prontuario.config.AmbientVar;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,7 +9,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 
 import com.devweb.prontuario.config.RsaKeyProperties;
-import org.springframework.context.annotation.ComponentScan;
 
 
 @SpringBootApplication
@@ -23,8 +23,9 @@ public class ProntuarioApplication{
 
 
 	public static void main(String[] args) {
+		// Configurando variaveis de ambiente
+		AmbientVar.run ();
 		SpringApplication.run(ProntuarioApplication.class, args);
-
 	}
 
 	

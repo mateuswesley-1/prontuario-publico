@@ -6,21 +6,19 @@ import com.devweb.prontuario.BaseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
 
 @Component
-@Getter
 @Setter
 @NoArgsConstructor
 @ToString
 public class Credenciais extends BaseEntity implements UserDetails  {
 
-    public String username;
-    public String password;
+    private String username;
+    private String password;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
