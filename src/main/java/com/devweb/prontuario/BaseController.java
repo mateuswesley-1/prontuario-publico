@@ -16,7 +16,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 
 @RestController
-public abstract class BaseController<T extends BaseEntity,
+public abstract class
+BaseController<T extends BaseEntity,
                                      Repo extends BaseRepositoryJBDC<T>,
                                      S extends BaseService<T, Repo>,
                                      E extends EntityRequestDTO,

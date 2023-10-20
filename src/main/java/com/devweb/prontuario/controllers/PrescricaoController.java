@@ -8,6 +8,11 @@ import com.devweb.prontuario.dto.prescricao.PrescricaoResponseDTO;
 import com.devweb.prontuario.entities.Prescricao;
 import com.devweb.prontuario.repositories.PrescricaoRepository;
 import com.devweb.prontuario.services.PrescricaoService;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/prescricoes")
 public class PrescricaoController extends BaseController<Prescricao, PrescricaoRepository, PrescricaoService, PrescricaoRequestDTO, PrescricaoResponseDTO, BaseMapper<Prescricao, PrescricaoRequestDTO, PrescricaoResponseDTO>> {
 
     public PrescricaoController(BaseMapper<Prescricao, PrescricaoRequestDTO, PrescricaoResponseDTO> mapper, PrescricaoService service) {
