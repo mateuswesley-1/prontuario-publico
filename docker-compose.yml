@@ -6,8 +6,29 @@ services:
     image: postgres
     ports:
       - "5331:5432"
+    networks:
+      - db
     environment:
       POSTGRES_USER: ${DATABASE_USERNAME}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
       POSTGRES_DB: ${DATABASE_NAME}
+    restart: unless-stopped
+
+  prontuario-api:
+    container_name: prontuario-api
+    image: mateus314/prontuario-api
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/prontuario
+    ports:
+      - "8088:8080"
+    networks:
+      - db
+    depends_on:
+      - db
+    restart: unless-stopped
+
+networks:
+  db:
+    driver: bridge
+
 
