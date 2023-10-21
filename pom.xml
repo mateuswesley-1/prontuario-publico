@@ -9,10 +9,16 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.devweb</groupId>
-	<artifactId>prontuario</artifactId>
+	<artifactId>prontuario-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>prontuario</name>
-	<description>Demo project for Spring Boot</description>
+	<description>RESTAPI para prontuário eletrônico</description>
+
+	<organization>
+		<name>
+			mateus314
+		</name>
+	</organization>
 	<properties>
 		<java.version>20</java.version>
 	</properties>
@@ -153,16 +159,88 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<goals>
-							<goal>repackage</goal>
-						</goals>
-					</execution>
-				</executions>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-maven-plugin</artifactId>
+			<executions>
+				<!-- antes eu tava iniciando a aplicação de dentro do teste
+				 agora to definindo em que fase do build maven ela deve iniciar.-->
+				<execution>
+					<id>pre-integration-test</id>
+					<goals>
+						<goal>start</goal>
+					</goals>
+				</execution>
+				<execution>
+					<id>post-integration-test</id>
+					<goals>
+						<goal>stop</goal>
+					</goals>
+				</execution>
+
+				<execution>
+					<id>process-aot</id>
+					<goals>
+						<goal>process-aot</goal>
+					</goals>
+				</execution>
+
+			</executions>
+		</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							**/*IntegrationTest.java
+						</exclude>
+					</excludes>
+				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<configuration>
+					<classesDirectory>${project.build.outputDirectory}</classesDirectory>
+					<includes>
+						<include>
+							**/*IntegrationTest.java
+						</include>
+					</includes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>3.4.0</version>
+				<configuration>
+					<from>
+						<image>
+							eclipse-temurin:20-jre
+						</image>
+					</from>
+					<to>
+						<image>docker.io/${project.organization.name}/${project.artifactId}:${project.version}</image>
+						<tags>
+							<tag>
+								latest
+							</tag>
+						</tags>
+					</to>
+					<container>
+						<environment>
+							<DATABASE_HOST>localhost</DATABASE_HOST>
+							<DATABASE_PORT>5331</DATABASE_PORT>
+							<DATABASE_NAME>prontuario</DATABASE_NAME>
+							<DATABASE_USERNAME>postgres</DATABASE_USERNAME>
+							<DATABASE_PASSWORD>password</DATABASE_PASSWORD>
+						</environment>
+					</container>
+				</configuration>
+			</plugin>
+
 		</plugins>
 	</build>
 
