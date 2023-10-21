@@ -1,9 +1,11 @@
 # REST API prontuário eletrônico
 A imagem docker da API está disponível no [docker hub](https://hub.docker.com/repository/docker/mateus314/prontuario-api/general)
 O banco de dados usado foi o postgreSQL, também utilizando um container docker.
-Para criar o container do banco de dados e da aplicação, é necessário executar o comando "docker compose up -d" 
-na raiz da aplicação.
-Dessa forma o docker rodará os serviços configurados no arquivo [docker-compose.yml](docker-compose.yml), baixando as imagens necessárias e construindo os containers.
+
+
+## 1) Executando a aplicação:
+
+A aplicação pode ser executada usando sua imagem docker, todas as configurações necessárias estão no arquivo [docker-compose.yml](docker-compose.yml). Para isso executamos o seguinte comando na raiz da aplicação:
 
 ``` 
 mateu@kimJonUn MINGW64 ~/.../prontuario-publico (main)
