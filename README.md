@@ -46,6 +46,25 @@ $ docker logs prontuario-api
 2023-10-21T23:19:26.272Z  INFO 1 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
 2023-10-21T23:19:26.281Z  INFO 1 --- [           main] c.d.prontuario.ProntuarioApplication     : Started ProntuarioApplication in 5.759 seconds (process running for 6.545)  
 ```
+## 2) Autenticação:
+Para se autenticar no sistema, é necessário enviar uma requisição Post para a URI "http://localhost:8088/"
+com o json contendo as credenciais desejadas no corpo da requisição:
+
+```
+PS C:\WINDOWS\system32> $url = "http://localhost:8088"
+PS C:\WINDOWS\system32> $body = @{
+>> username = "username_de_teste"
+>> password = "password"
+>> } | ConvertTo-Json
+PS C:\WINDOWS\system32> Invoke-RestMethod -Uri ($url + "/credenciais") -Method Post -Body $body -ContentType "application/json"
+PS C:\WINDOWS\system32> $token = Invoke-RestMethod -Uri ($url + "/token") -Method Post -Body $body -ContentType "application/json"
+PS C:\WINDOWS\system32> $token
+eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidXNlcm5hbWVfZGVfdGVzdGUiLCJleHAiOjE2OTgxMDM3NjAsImlhdCI6MTY5ODEwMDE2MCwic2NvcGUiOiIifQ.smi0f3TsA59aSMN3aCkJKRn9o4uMVMLyXy62qP8hJETE_OS7f3QSZOCQRFzrlo2ZKQo4sDmaxvXymO4GKK6nACKCRT5WTOjAaciGKEjgBTAOKJ0JXC1JbunXE6lETsF064f24tBVkhiEU91lcMoZuYkvwtLxlmEZYL0XN06xvKOwPNSinxps5G_rOtfuFXGW60ls-7qLLjs1BB490EN4LX8K0QW95Z18rb5ehYuFnXWHWr6MTSnLT6cbvGFS6eSNfi4nDU2dgNXTNmB7U8rObg1Dd8OVTQdu3TJos5rAwgzjCpmQ81B9FzlZzUxOtsX6D9ermJtXMWlQ3EIAt2-MmQ
+```
+
+Todas as requisições para outras urls devem ter o token adicionado no header da requisição como valor da chave "Authorization".
+Todos end-points disponíveis podem ser encontrados no swagger da aplicação, uma vez que a mesma esteja rodando
+[localhost:8088/swagger-ui/index.html](http://localhost:8088/swagger-ui/index.html)
 
 
 
