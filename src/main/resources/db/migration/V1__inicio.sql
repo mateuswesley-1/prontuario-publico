@@ -24,12 +24,12 @@ CREATE TABLE credenciais_tb(
 
 CREATE TABLE atestado_tb
 (
-   id VARCHAR(36) PRIMARY KEY DEFAULT uuid_generate_v4(),
-   created_at TIMESTAMP NOT NULL,
-   deleted_at TIMESTAMP,
-   updated_at TIMESTAMP NOT NULL,
-   duracao integer NOT NULL CHECK ( duracao > 1 ),
-   descricao VARCHAR(250)
+    id VARCHAR(36) PRIMARY KEY DEFAULT uuid_generate_v4(),
+    created_at TIMESTAMP NOT NULL,
+    deleted_at TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL,
+    duracao integer NOT NULL CHECK ( duracao >= 1 AND duracao <= 30),
+    descricao VARCHAR(250)
 );
 
 CREATE TABLE medicamento_tb

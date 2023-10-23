@@ -1,5 +1,6 @@
 package com.devweb.prontuario;
 
+import com.devweb.prontuario.config.AmbientVar;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,6 +23,7 @@ public class ProntuarioApplication{
 
 	public static void main(String[] args) {
 		// Configurando variaveis de ambiente
+		AmbientVar.run ();
 		SpringApplication.run(ProntuarioApplication.class, args);
 	}
 

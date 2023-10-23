@@ -18,7 +18,7 @@ public class ConsultaRepositoryTest extends BaseTestContainers {
     @BeforeEach
     void setUp() {
         this.underTest = new ConsultaRepository (
-                BaseTestContainers.getJbdcTemplate ( )
+                this.getJbdcTemplate ( )
         );
     }
 

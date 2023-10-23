@@ -1,42 +1,21 @@
 package com.devweb.prontuario.journey;
 
-import com.devweb.prontuario.dto.credenciais.CredenciaisDTO;
+import com.devweb.prontuario.BaseIntegrationTest;
 import com.devweb.prontuario.dto.medico.MedicoRequestDTO;
 import com.devweb.prontuario.entities.Medico;
-import org.junit.jupiter.api.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@TestMethodOrder( MethodOrderer.OrderAnnotation.class )
-public class MedicoIntegrationTest {
-    @Autowired
-    private WebTestClient webTestClient;
-    private String authToken;
-    private static final String URI = "/medicos";
-    private static String uuid;
-    @BeforeEach
-    void login(){
-        CredenciaisDTO dto = new CredenciaisDTO ();
-        dto.setUsername ( "mateus" );
-        dto.setPassword ( "mateus" );
-
-        this.authToken = webTestClient.post()
-                .uri("/token") // Endpoint para autenticação
-                .contentType( MediaType.APPLICATION_JSON)
-                .bodyValue(dto)
-                .exchange()
-                .expectStatus().isOk()
-                .expectBody(String.class)
-                .returnResult()
-                .getResponseBody();
+public class MedicoIntegrationTest extends BaseIntegrationTest {
+    @BeforeAll static void fieldsInicialization(){
+        URI = "/medicos";
     }
     @Test
     @Order(1)
@@ -50,7 +29,7 @@ public class MedicoIntegrationTest {
         dto.setEspecialidade ( "testando" );
         dto.setCrm ( 10023 );
 
-        Medico createdObject = webTestClient
+        webTestClient
                 .post ( )
                 .uri ( URI )
                 .header ( "Authorization", "Bearer " + authToken )
@@ -62,9 +41,6 @@ public class MedicoIntegrationTest {
                 .expectBody ( Medico.class )
                 .returnResult ( )
                 .getResponseBody ( );
-
-        assert createdObject != null;
-        uuid = createdObject.getId ();
     }
 
     @Test
@@ -82,9 +58,10 @@ public class MedicoIntegrationTest {
     @Test
     @Order(3)
     void canGetById(){
+        Medico createdObject = getMedico();
         webTestClient
                 .get ()
-                .uri(URI + "/" + uuid)
+                .uri(URI + "/" + createdObject.getId ())
                 .header("Authorization", "Bearer " + authToken)
                 .exchange ()
                 .expectStatus ()
@@ -94,12 +71,38 @@ public class MedicoIntegrationTest {
     @Test
     @Order(4)
     void canDelete(){
+        Medico createdObject = getMedico();
         webTestClient
                 .delete ()
-                .uri(URI + "/" + uuid )
+                .uri(URI + "/" + createdObject.getId () )
                 .header("Authorization", "Bearer " + authToken)
                 .exchange ()
                 .expectStatus ()
                 .isNoContent ();
     }
+
+    private Medico getMedico() {
+        MedicoRequestDTO dto = new MedicoRequestDTO ();
+        dto.setNome ( "nome_teste" );
+        dto.setCPF ( "cpf_test" );
+        dto.setEmail ( "email_test" + UUID.randomUUID ( ));
+        dto.setEndereco ( "rua teste" );
+        dto.setDataNascimento ( LocalDate.now ( ) );
+        dto.setEspecialidade ( "testando" );
+        dto.setCrm ( 10023 );
+
+
+        return webTestClient
+                .post ( )
+                .uri ( URI )
+                .header ( "Authorization", "Bearer " + authToken )
+                .accept ( MediaType.APPLICATION_JSON )
+                .contentType ( MediaType.APPLICATION_JSON )
+                .body ( Mono.just ( dto ), MedicoRequestDTO.class )
+                .exchange ( )
+                .expectBody ( Medico.class )
+                .returnResult ( )
+                .getResponseBody ( );
+    }
+
 }

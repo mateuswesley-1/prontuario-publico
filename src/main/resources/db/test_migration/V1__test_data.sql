@@ -28,7 +28,7 @@ CREATE TABLE atestado_tb
     created_at TIMESTAMP NOT NULL,
     deleted_at TIMESTAMP,
     updated_at TIMESTAMP NOT NULL,
-    duracao integer NOT NULL CHECK ( duracao > 1 ),
+    duracao integer NOT NULL CHECK ( duracao >= 1 AND duracao <= 30),
     descricao VARCHAR(250)
 );
 

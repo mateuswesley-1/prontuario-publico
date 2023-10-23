@@ -44,8 +44,8 @@ public class CredencialController
     @PostMapping
     public ResponseEntity<Object> create(@RequestBody CredenciaisRequestDTO dto) {
         Credenciais credenciais = this.mapper.requestDtoToEntity ( dto, Credenciais.class);
-        service.add ( credenciais );
-        return ResponseEntity.status ( HttpStatus.CREATED ).build ( );
+        Credenciais created =  service.add ( credenciais );
+        return ResponseEntity.status ( HttpStatus.CREATED ).body ( created );
     }
 
     @Override

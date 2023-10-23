@@ -5,7 +5,7 @@ O banco de dados usado foi o postgreSQL, também utilizando um container docker.
 
 ## 1) Executando a aplicação:
 
-A aplicação pode ser executada usando sua imagem docker, todas as configurações necessárias estão no arquivo [docker-compose.yml](docker-compose.yml). Para isso executamos o seguinte comando na raiz da aplicação:
+A aplicação pode ser executada usando a sua imagem docker, todas as configurações necessárias estão no arquivo [docker-compose.yml](docker-compose.yml). Para isso executamos o seguinte comando na raiz da aplicação:
 
 ``` 
 mateu@kimJonUn MINGW64 ~/.../prontuario-publico (main)

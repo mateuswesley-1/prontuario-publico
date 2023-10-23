@@ -2,7 +2,6 @@ package com.devweb.prontuario.repositories;
 
 import com.devweb.prontuario.BaseTestContainers;
 import com.devweb.prontuario.entities.Funcionario;
-import com.devweb.prontuario.entities.Funcionario;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Page;
@@ -20,7 +19,7 @@ public class FuncionarioRepositoryTest extends BaseTestContainers{
     @BeforeEach
     void setUp() {
         this.underTest = new FuncionarioRepository (
-                BaseTestContainers.getJbdcTemplate ( )
+                this.getJbdcTemplate ( )
         );
     }
 
@@ -65,7 +64,6 @@ public class FuncionarioRepositoryTest extends BaseTestContainers{
     @Test
     void EntityShouldNotBePresentWhenDeleted() {
         // Given
-        Pageable pageable = PageRequest.of ( 1, 10 );
         String expectedId = "funcionario_id";
 
         // When

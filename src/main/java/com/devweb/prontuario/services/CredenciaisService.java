@@ -3,6 +3,7 @@ package com.devweb.prontuario.services;
 
 
 import com.devweb.prontuario.BaseService;
+import com.devweb.prontuario.exceptions.CustomExceptions.EntityNotFoundException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -25,18 +26,17 @@ public class CredenciaisService extends BaseService<Credenciais, CredenciaisRepo
         this.encoder = encoder;
     }
 
-    public void add(Credenciais c){
+    public Credenciais add(Credenciais c){
         c.setPassword(encoder.encode(c.getPassword()));
-        repository.save(c);
+        Optional<Credenciais> result =  repository.save(c);
+        if (result.isPresent ()) return result.get ();
+        throw new EntityNotFoundException ( "Nao foi possivel cadastrar." );
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<Credenciais> credenciais = repository.findByUsername(username);
-        if (credenciais.isPresent()){
-            return credenciais.get();
-        }else{
-            throw new UsernameNotFoundException("Usuario não cadastrado com username "+username);
-        }
+        if (credenciais.isPresent()) return credenciais.get();
+        throw new UsernameNotFoundException("Usuario não cadastrado com username "+ username);
     }
 }

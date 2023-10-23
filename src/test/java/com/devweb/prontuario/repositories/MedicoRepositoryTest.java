@@ -1,7 +1,6 @@
 package com.devweb.prontuario.repositories;
 
 import com.devweb.prontuario.BaseTestContainers;
-import com.devweb.prontuario.entities.Medicamento;
 import com.devweb.prontuario.entities.Medico;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,7 +18,7 @@ class MedicoRepositoryTest extends BaseTestContainers {
     @BeforeEach
     void setUp() {
         this.underTest = new MedicoRepository (
-                BaseTestContainers.getJbdcTemplate ( )
+                this.getJbdcTemplate ( )
         );
     }
 
@@ -64,7 +63,6 @@ class MedicoRepositoryTest extends BaseTestContainers {
     @Test
     void EntityShouldNotBePresentWhenDeleted() {
         // Given
-        Pageable pageable = PageRequest.of ( 1, 10 );
         String expectedId = "medico_id";
 
         // When

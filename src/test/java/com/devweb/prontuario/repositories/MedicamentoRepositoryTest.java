@@ -18,7 +18,7 @@ class MedicamentoRepositoryTest extends BaseTestContainers{
     @BeforeEach
     void setUp() {
         this.underTest = new MedicamentoRepository (
-                BaseTestContainers.getJbdcTemplate ( )
+                this.getJbdcTemplate ( )
         );
     }
 
@@ -63,7 +63,6 @@ class MedicamentoRepositoryTest extends BaseTestContainers{
     @Test
     void EntityShouldNotBePresentWhenDeleted() {
         // Given
-        Pageable pageable = PageRequest.of ( 1, 10 );
         String expectedId = "medicamento_id";
 
         // When

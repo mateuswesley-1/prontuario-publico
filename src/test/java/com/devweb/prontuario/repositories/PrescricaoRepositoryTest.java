@@ -18,7 +18,7 @@ class PrescricaoRepositoryTest extends BaseTestContainers {
     @BeforeEach
     void setUp() {
         this.underTest = new PrescricaoRepository (
-                BaseTestContainers.getJbdcTemplate ( )
+                this.getJbdcTemplate ( )
         );
     }
 
@@ -63,7 +63,6 @@ class PrescricaoRepositoryTest extends BaseTestContainers {
     @Test
     void EntityShouldNotBePresentWhenDeleted() {
         // Given
-        Pageable pageable = PageRequest.of ( 1, 10 );
         String expectedId = "prescricao_id";
 
         // When

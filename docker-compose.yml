@@ -12,7 +12,7 @@ services:
       POSTGRES_USER: ${DATABASE_USERNAME}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
       POSTGRES_DB: ${DATABASE_NAME}
-    restart: unless-stopped
+
 
   prontuario-api:
     container_name: prontuario-api
@@ -26,9 +26,14 @@ services:
     depends_on:
       - db
     restart: unless-stopped
+    volumes:
+      - postgres-data-volume:/var/lib/postgresql/data
+
 
 networks:
   db:
     driver: bridge
 
 
+volumes:
+  postgres-data-volume:

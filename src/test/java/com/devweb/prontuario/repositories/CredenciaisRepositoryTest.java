@@ -28,7 +28,7 @@ class CredenciaisRepositoryTest extends BaseTestContainers{
 
     @BeforeEach
     void setUp() {
-        this.template = BaseTestContainers.getJbdcTemplate ( );
+        this.template = this.getJbdcTemplate ( );
         this.underTest =
                 new CredenciaisRepository (
                     this.template

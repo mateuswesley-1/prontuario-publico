@@ -1,39 +1,20 @@
 package com.devweb.prontuario.journey;
 
-import com.devweb.prontuario.dto.credenciais.CredenciaisDTO;
+import com.devweb.prontuario.BaseIntegrationTest;
 import com.devweb.prontuario.dto.medicamento.MedicamentoRequestDTO;
 import com.devweb.prontuario.entities.Medicamento;
-import org.junit.jupiter.api.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@TestMethodOrder( MethodOrderer.OrderAnnotation.class )
-public class MedicamentoIntegrationTest {
-    @Autowired
-    private WebTestClient webTestClient;
-    private String authToken;
-    private static final String URI = "/medicamentos";
-    private static String uuid;
-    @BeforeEach
-    void login(){
-        CredenciaisDTO dto = new CredenciaisDTO ();
-        dto.setUsername ( "mateus" );
-        dto.setPassword ( "mateus" );
 
-        this.authToken = webTestClient.post()
-                .uri("/token") // Endpoint para autenticação
-                .contentType( MediaType.APPLICATION_JSON)
-                .bodyValue(dto)
-                .exchange()
-                .expectStatus().isOk()
-                .expectBody(String.class)
-                .returnResult()
-                .getResponseBody();
+public class MedicamentoIntegrationTest extends BaseIntegrationTest {
+    @BeforeAll static void fieldsInicialization(){
+        URI = "/medicamentos";
     }
+    
     @Test
     @Order(1)
     void canRegister(){
@@ -41,7 +22,7 @@ public class MedicamentoIntegrationTest {
         dto.setNome ( "nome_teste" );
         dto.setDose ( 200.0f );
 
-        Medicamento createdObject = webTestClient
+        webTestClient
                 .post ( )
                 .uri ( URI )
                 .header ( "Authorization", "Bearer " + authToken )
@@ -54,8 +35,6 @@ public class MedicamentoIntegrationTest {
                 .returnResult ( )
                 .getResponseBody ( );
 
-        assert createdObject != null;
-        uuid = createdObject.getId ();
     }
 
     @Test
@@ -73,9 +52,10 @@ public class MedicamentoIntegrationTest {
     @Test
     @Order(3)
     void canGetById(){
+        Medicamento createdObject = getMedicamento();
         webTestClient
                 .get ()
-                .uri(URI + "/" + uuid)
+                .uri(URI + "/" + createdObject.getId ())
                 .header("Authorization", "Bearer " + authToken)
                 .exchange ()
                 .expectStatus ()
@@ -85,12 +65,31 @@ public class MedicamentoIntegrationTest {
     @Test
     @Order(4)
     void canDelete(){
+        Medicamento createdObject = getMedicamento();
         webTestClient
                 .delete ()
-                .uri(URI + "/" + uuid )
+                .uri(URI + "/" + createdObject.getId () )
                 .header("Authorization", "Bearer " + authToken)
                 .exchange ()
                 .expectStatus ()
                 .isNoContent ();
+    }
+
+    private Medicamento getMedicamento() {
+        MedicamentoRequestDTO dto = new MedicamentoRequestDTO ();
+        dto.setNome ( "nome_teste" );
+        dto.setDose ( 200.0f );
+
+        return webTestClient
+                .post ( )
+                .uri ( URI )
+                .header ( "Authorization", "Bearer " + authToken )
+                .accept ( MediaType.APPLICATION_JSON )
+                .contentType ( MediaType.APPLICATION_JSON )
+                .body ( Mono.just ( dto ), MedicamentoRequestDTO.class )
+                .exchange ( )
+                .expectBody ( Medicamento.class )
+                .returnResult ( )
+                .getResponseBody ( );
     }
 }

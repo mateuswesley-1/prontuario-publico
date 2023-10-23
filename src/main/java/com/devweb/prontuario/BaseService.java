@@ -5,6 +5,7 @@ import java.util.Optional;
 
 
 import com.devweb.prontuario.exceptions.CustomExceptions.EntityNotFoundException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -36,7 +37,7 @@ public abstract class BaseService<T extends BaseEntity, Repo extends BaseReposit
         Optional<T> result = repository.save(entityInstance);
 
         if(result.isPresent ()) return result.get ();
-        throw new RuntimeException ( "Nao foi possivel criar o objeto fornecido" );
+        throw new DataIntegrityViolationException ( "Nao foi possivel criar o objeto fornecido" );
     }
 
     public void delete(String id){
