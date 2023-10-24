@@ -1,6 +1,5 @@
 package com.devweb.prontuario;
 
-import com.devweb.prontuario.config.AmbientVar;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,7 +12,7 @@ import com.devweb.prontuario.config.RsaKeyProperties;
 @SpringBootApplication
 @EnableConfigurationProperties(RsaKeyProperties.class)
 public class ProntuarioApplication{
-	
+
 
 	@Bean
 	public ModelMapper mapper(){
@@ -22,11 +21,9 @@ public class ProntuarioApplication{
 
 
 	public static void main(String[] args) {
-		// Configurando variaveis de ambiente
-		AmbientVar.run ();
 		SpringApplication.run(ProntuarioApplication.class, args);
 	}
 
-	
+
 
 }

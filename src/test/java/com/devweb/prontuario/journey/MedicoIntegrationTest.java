@@ -6,12 +6,12 @@ import com.devweb.prontuario.entities.Medico;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
 import java.util.UUID;
-
 
 public class MedicoIntegrationTest extends BaseIntegrationTest {
     @BeforeAll static void fieldsInicialization(){

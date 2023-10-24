@@ -14,7 +14,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice
 public class ControllerAdvisor extends ResponseEntityExceptionHandler {
-
     @ExceptionHandler(EntityNotFoundException.class)
     ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException e){
         Map<String, Object> body = new LinkedHashMap<>();
@@ -23,7 +22,6 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
         
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
-
     @ExceptionHandler(DataIntegrityViolationException.class)
     ResponseEntity<Object> handleDataIntegrityViolationException(DataIntegrityViolationException e){
         Map<String, Object> body = new LinkedHashMap<>();
@@ -32,6 +30,4 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
 
         return new ResponseEntity<>(body, HttpStatus.CONFLICT);
     }
-
-
 }
