@@ -7,8 +7,6 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
@@ -26,14 +24,7 @@ public class BaseIntegrationTest {
 
     private final String login_user = "test_user" + UUID.randomUUID ( );
     private final String login_password = "test_password";
-    @Configuration
-    static class TestConfiguration {
 
-        @Bean
-        public WebTestClient webTestClient() {
-            return WebTestClient.bindToServer().build();
-        }
-    }
     @BeforeEach
     void login(){
         CredenciaisDTO dto = new CredenciaisDTO ();
