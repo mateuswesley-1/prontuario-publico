@@ -25,7 +25,6 @@ class AtestadoRepositoryTest extends BaseTestContainers {
 
     private AtestadoRepository underTest;
 
-
     @BeforeEach
     void setUp() {
         this.underTest = new AtestadoRepository (

@@ -1,15 +1,14 @@
 package com.devweb.prontuario.entities;
 
-import java.util.Collection;
-
 import com.devweb.prontuario.BaseEntity;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+
+import java.util.Collection;
 
 @Component
 @Setter
