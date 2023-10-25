@@ -4,8 +4,8 @@ O banco de dados usado foi o postgreSQL, também utilizando um container docker.
 
 
 ##  Executando a aplicação:
-1) Baixar o arquivo [docker-compose.yml](docker-compose.yml):
-A aplicação pode ser executada usando a sua imagem docker, todas as configurações necessárias estão no arquivo [docker-compose.yml](docker-compose.yml). Para isso executamos o seguinte comando na pasta onde o arquivo foi baixado:
+### Baixar o arquivo [docker-compose.yml](docker-compose.yml):
+### Executar o seguinte comando na pasta onde o arquivo se encontra:
 
 ``` 
 mateu@kimJonUn MINGW64 ~/.../prontuario-publico (main)
@@ -46,7 +46,7 @@ $ docker logs prontuario-api
 2023-10-21T23:19:26.272Z  INFO 1 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
 2023-10-21T23:19:26.281Z  INFO 1 --- [           main] c.d.prontuario.ProntuarioApplication     : Started ProntuarioApplication in 5.759 seconds (process running for 6.545)  
 ```
-## 2) Autenticação:
+## Autenticação:
 Para se autenticar no sistema, é necessário enviar uma requisição Post para a URI "http://localhost:8088/"
 com o json contendo as credenciais desejadas no corpo da requisição:
 
