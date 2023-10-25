@@ -46,6 +46,7 @@
 			<artifactId>docker-java</artifactId>
 			<version>3.3.0</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webflux</artifactId>
@@ -171,34 +172,39 @@
 
 	<build>
 		<plugins>
+
 			<plugin>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-maven-plugin</artifactId>
-			<executions>
-				<!-- antes eu tava iniciando a aplicação de dentro do teste
-				 agora to definindo em que fase do build maven ela deve iniciar.-->
-				<execution>
-					<id>pre-integration-test</id>
-					<goals>
-						<goal>start</goal>
-					</goals>
-				</execution>
-				<execution>
-					<id>post-integration-test</id>
-					<goals>
-						<goal>stop</goal>
-					</goals>
-				</execution>
+				<groupId>
+					org.springframework.boot
+				</groupId>
+				<artifactId>
+					spring-boot-maven-plugin
+				</artifactId>
+				<executions>
+					<!-- antes eu tava iniciando a aplicação de dentro do teste
+					 agora to definindo em que fase do build maven ela deve iniciar.-->
+					<execution>
+						<id>pre-integration-test</id>
+						<goals>
+							<goal>start</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>post-integration-test</id>
+						<goals>
+							<goal>stop</goal>
+						</goals>
+					</execution>
 
-				<execution>
-					<id>process-aot</id>
-					<goals>
-						<goal>process-aot</goal>
-					</goals>
-				</execution>
+					<execution>
+						<id>process-aot</id>
+						<goals>
+							<goal>process-aot</goal>
+						</goals>
+					</execution>
 
-			</executions>
-		</plugin>
+				</executions>
+			</plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -224,6 +230,7 @@
 					</includes>
 				</configuration>
 			</plugin>
+
 			<plugin>
 				<groupId>com.google.cloud.tools</groupId>
 				<artifactId>jib-maven-plugin</artifactId>
@@ -251,6 +258,7 @@
 							<DATABASE_PASSWORD>password</DATABASE_PASSWORD>
 						</environment>
 					</container>
+
 				</configuration>
 			</plugin>
 

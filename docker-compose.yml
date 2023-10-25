@@ -1,39 +1,36 @@
 version: "3.8"
-
 services:
+  prontuario-api:
+    container_name: prontuario-api
+    image: mateus314/prontuario-api
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${DATABASE_NAME}
+    depends_on:
+      - db
+    ports:
+      - "8088:8080"
+    networks:
+      - database-networks
+    restart: unless-stopped
+
   db:
     container_name: postgres
     image: postgres
     ports:
       - "5331:5432"
     networks:
-      - db
+      - database-networks
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: prontuario
-
-
-  prontuario-api:
-    container_name: prontuario-api
-    image: mateus314/prontuario-api
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/prontuario
-    ports:
-      - "8088:8080"
-    networks:
-      - db
-    depends_on:
-      - db
-    restart: unless-stopped
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
     volumes:
       - postgres-data-volume:/var/lib/postgresql/data
 
 
 networks:
-  db:
+  database-networks:
     driver: bridge
-
 
 volumes:
   postgres-data-volume:
