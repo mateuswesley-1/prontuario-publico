@@ -3,9 +3,9 @@ A imagem docker da API está disponível no [docker hub](https://hub.docker.com/
 O banco de dados usado foi o postgreSQL, também utilizando um container docker.
 
 
-## 1) Executando a aplicação:
-
-A aplicação pode ser executada usando a sua imagem docker, todas as configurações necessárias estão no arquivo [docker-compose.yml](docker-compose.yml). Para isso executamos o seguinte comando na raiz da aplicação:
+##  Executando a aplicação:
+1) Baixar o arquivo [docker-compose.yml](docker-compose.yml):
+A aplicação pode ser executada usando a sua imagem docker, todas as configurações necessárias estão no arquivo [docker-compose.yml](docker-compose.yml). Para isso executamos o seguinte comando na pasta onde o arquivo foi baixado:
 
 ``` 
 mateu@kimJonUn MINGW64 ~/.../prontuario-publico (main)
