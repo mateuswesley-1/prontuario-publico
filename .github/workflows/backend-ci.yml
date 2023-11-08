@@ -32,5 +32,8 @@ jobs:
           distribution: 'temurin'
           java-version: '20'
           cache: 'maven'
+      - name: Add executable permissions to mvnw
+        run: |
+          chmod +x ./mvnw
       - name: Build and run Test with maven
         run: ./mvnw -ntp -B verify jib:build

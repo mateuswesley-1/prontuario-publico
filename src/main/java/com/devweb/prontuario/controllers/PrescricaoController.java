@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class PrescricaoController extends BaseController<Prescricao, PrescricaoRepository, PrescricaoService, PrescricaoRequestDTO, PrescricaoResponseDTO, BaseMapper<Prescricao, PrescricaoRequestDTO, PrescricaoResponseDTO>> {
 
     public PrescricaoController(BaseMapper<Prescricao, PrescricaoRequestDTO, PrescricaoResponseDTO> mapper, PrescricaoService service) {
-
         super(mapper, service, Prescricao.class, PrescricaoResponseDTO.class);
     }
 
