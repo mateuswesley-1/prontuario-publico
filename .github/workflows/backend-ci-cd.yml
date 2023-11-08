@@ -44,6 +44,7 @@ jobs:
       - name: Build and run Test with maven
         run: ./mvnw -ntp -B verify jib:build
   deploy:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Deploy
