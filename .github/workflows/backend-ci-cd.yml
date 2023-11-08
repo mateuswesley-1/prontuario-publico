@@ -55,7 +55,7 @@ jobs:
           curl --request POST \
                --url 'https://api.render.com/v1/deploys' \
                --header 'Content-Type: application/json' \
-               --header 'Authorization: Bearer ${{ secrets.MY_RENDER_API_TOKEN }}' \
+               --header "Authorization: Bearer ${{ secrets.RENDER_API_TOKEN }}" \
                --data '{
                  "serviceId": "${{ secrets.MY_RENDER_SERVICE_ID }}",
                  "build": {
