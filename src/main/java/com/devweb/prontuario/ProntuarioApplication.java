@@ -16,7 +16,9 @@ public class ProntuarioApplication{
 
 	@Bean
 	public ModelMapper mapper(){
+
 		return new ModelMapper();
+
 	}
 
 
