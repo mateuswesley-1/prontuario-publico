@@ -43,24 +43,3 @@ jobs:
           chmod +x ./mvnw
       - name: Build and run Test with maven
         run: ./mvnw -ntp -B verify jib:build
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Deploy to Render
-        run: |
-          curl --request POST \
-               --url 'https://api.render.com/v1/deploys' \
-               --header 'Content-Type: application/json' \
-               --header "Authorization: Bearer ${{ secrets.RENDER_API_TOKEN }}" \
-               --data '{
-                 "serviceId": "${{ secrets.MY_RENDER_SERVICE_ID }}",
-                 "build": {
-                   "buildCommand": "",
-                   "directory": "target"
-                 }
-               }'
-          sleep 30
