@@ -63,3 +63,4 @@ jobs:
                    "directory": "target"
                  }
                }'
+          sleep 30
