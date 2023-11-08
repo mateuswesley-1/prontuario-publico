@@ -21,7 +21,9 @@ public class AtestadoController extends BaseController<Atestado,
                                                        BaseMapper<Atestado, AtestadoRequestDTO, AtestadoResponseDTO>
                                                        > {
                                                     
-    
+
+
+
     public AtestadoController(BaseMapper<Atestado, AtestadoRequestDTO, AtestadoResponseDTO> mapper, AtestadoService service) {
 
         super(mapper, service, Atestado.class, AtestadoResponseDTO.class);
