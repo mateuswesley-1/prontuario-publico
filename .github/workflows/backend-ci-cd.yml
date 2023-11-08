@@ -1,6 +1,7 @@
-name: CI - Build Backend
+name: CI/CD - Build Backend
 
 on:
+  workflow_dispatch:
   pull_request:
     branches:
       - "main"
@@ -42,3 +43,11 @@ jobs:
           chmod +x ./mvnw
       - name: Build and run Test with maven
         run: ./mvnw -ntp -B verify jib:build
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy
+        uses: johnbeynon/render-deploy-action@v0.0.8
+        with:
+          service-id: ${{ secrets.MY_RENDER_SERVICE_ID }}
+          api-key: ${{ secrets.MY_RENDER_API_KEY }}
