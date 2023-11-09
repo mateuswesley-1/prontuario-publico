@@ -8,7 +8,7 @@ ENV DATABASE_PASSWORD=password
 
 WORKDIR /app
 
-COPY target/prontuario-api.jar /app/prontuario-api-0.0.1-SNAPSHOT.jar
+COPY target/prontuario-api-0.0.1-SNAPSHOT.jar /app/prontuario-api-0.0.1-SNAPSHOT.jar
 
 EXPOSE 8080
 
