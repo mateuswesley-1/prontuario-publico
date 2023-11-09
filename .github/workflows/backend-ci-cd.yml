@@ -51,6 +51,6 @@ jobs:
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v5
       with:
-        base: main
+        branch: main
         title: pre-deploy
 
