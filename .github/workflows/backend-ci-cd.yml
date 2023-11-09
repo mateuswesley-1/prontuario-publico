@@ -5,6 +5,7 @@ on:
   push:
     branches: #agr qualquer branch dispara as actions, mas o deploy em render so pega a branch main.
       - '*'
+      - '!main'
 jobs:
   build:
     runs-on: ubuntu-latest
