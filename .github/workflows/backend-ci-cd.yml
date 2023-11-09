@@ -43,3 +43,13 @@ jobs:
           chmod +x ./mvnw
       - name: Build and run Test with maven
         run: ./mvnw -ntp -B verify jib:build
+  pull-request:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v5
+      with:
+        base: main
+        title: pre-deploy
+
