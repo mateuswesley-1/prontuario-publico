@@ -2,7 +2,7 @@ name: CI/CD - Build Backend
 
 on:
   workflow_dispatch:
-  pull_request:
+  push:
     branches: #agr qualquer branch dispara as actions, mas o deploy em render so pega a branch main.
       - '*'
 jobs:
