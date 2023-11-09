@@ -1,4 +1,4 @@
-FROM mateus314/prontuario-api-github:latest
+FROM mateus314/prontuario-ap:latest
 
 ENV DATABASE_HOST=localhost
 ENV DATABASE_PORT=5331
