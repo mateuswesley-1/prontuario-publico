@@ -53,4 +53,5 @@ jobs:
       with:
         branch: main
         title: pre-deploy
+        token: ${{ secrets.GITHUB_TOKEN }}
 
