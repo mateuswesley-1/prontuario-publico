@@ -1,4 +1,4 @@
-FROM eclipse-temurin:20-jre
+FROM mateus314/prontuario-api-github:latest
 
 ENV DATABASE_HOST=localhost
 ENV DATABASE_PORT=5331
