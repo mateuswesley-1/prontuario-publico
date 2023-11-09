@@ -52,6 +52,6 @@ jobs:
       uses: peter-evans/create-pull-request@v5
       with:
         branch: main
-        title: pre-deploy
+        title: pre-deploy-pull
         token: ${{ secrets.MY_GITHUB_TOKEN }}
 
