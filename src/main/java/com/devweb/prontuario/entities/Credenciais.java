@@ -1,16 +1,19 @@
 package com.devweb.prontuario.entities;
 
-import com.devweb.prontuario.BaseEntity;
+import com.devweb.prontuario.base.BaseEntity;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 
-@Component
+
+@Entity
+@Table(name = "credenciais_tb")
 @Setter
 @NoArgsConstructor
 @ToString

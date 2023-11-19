@@ -23,8 +23,8 @@ public class FuncionarioIntegrationTest extends BaseIntegrationTest {
         FuncionarioRequestDTO dto = new FuncionarioRequestDTO ();
         dto.setNome ( "nome_teste" );
         dto.setCargo ( "cargo_teste" );
-        dto.setCPF ( "cpf_test" );
-        dto.setEmail ( "email_test"  + UUID.randomUUID ( ));
+        dto.setCPF ( "43562054050" );
+        dto.setEmail ( "email_test"  + UUID.randomUUID ( ).toString ().substring ( 0, 5 )+ "@gmail.com");
         dto.setEndereco ( "rua teste" );
         dto.setDataNascimento ( LocalDate.now ( ) );
 
@@ -87,8 +87,8 @@ public class FuncionarioIntegrationTest extends BaseIntegrationTest {
         FuncionarioRequestDTO dto = new FuncionarioRequestDTO ();
         dto.setNome ( "nome_teste" );
         dto.setCargo ( "cargo_teste" );
-        dto.setCPF ( "cpf_test" );
-        dto.setEmail ( "email_test"  + UUID.randomUUID ( ));
+        dto.setCPF ( "43562054050" );
+        dto.setEmail ( "email_test"  + UUID.randomUUID ( ).toString ().substring ( 0, 5 ) + "@gmail.com");
         dto.setEndereco ( "rua teste" );
         dto.setDataNascimento ( LocalDate.now ( ) );
 

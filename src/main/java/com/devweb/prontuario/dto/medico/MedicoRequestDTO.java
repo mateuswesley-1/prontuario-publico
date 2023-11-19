@@ -1,15 +1,8 @@
 package com.devweb.prontuario.dto.medico;
 
 
-
-import com.devweb.prontuario.EntityRequestDTO;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.time.LocalDate;
+import com.devweb.prontuario.base.EntityRequestDTO;
+import lombok.*;
 
 @Getter
 @Setter
@@ -19,10 +12,6 @@ import java.time.LocalDate;
 public class MedicoRequestDTO extends EntityRequestDTO {
     private long crm;
     private String especialidade;
-    private String CPF;
-    private String nome;
-    private LocalDate dataNascimento;
-    private String endereco;
-    private String email;
+    private String funcionarioId;
 }
 

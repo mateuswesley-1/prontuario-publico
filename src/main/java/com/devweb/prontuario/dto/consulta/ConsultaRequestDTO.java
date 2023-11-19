@@ -1,11 +1,11 @@
 package com.devweb.prontuario.dto.consulta;
 
-import java.util.List;
-
-import com.devweb.prontuario.EntityRequestDTO;
-
+import com.devweb.prontuario.base.EntityRequestDTO;
+import com.devweb.prontuario.dto.atestado.AtestadoRequestDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.util.List;
 
 
 @EqualsAndHashCode(callSuper = true)
@@ -15,5 +15,5 @@ public class ConsultaRequestDTO extends EntityRequestDTO {
     private String idPaciente;
     private String anamnese;
     private List<String> prescricoes;
-    private String idAtestado;
+    private AtestadoRequestDTO atestado;
 }

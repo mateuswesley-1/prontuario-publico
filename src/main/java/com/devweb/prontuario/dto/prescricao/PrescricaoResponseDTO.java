@@ -1,7 +1,6 @@
 package com.devweb.prontuario.dto.prescricao;
 
-import com.devweb.prontuario.controllers.PrescricaoController;
-import com.devweb.prontuario.EntityResponseDTO;
+import com.devweb.prontuario.base.EntityResponseDTO;
 import com.devweb.prontuario.dto.medicamento.MedicamentoResponseDTO;
 
 import lombok.EqualsAndHashCode;
@@ -19,6 +18,7 @@ public class PrescricaoResponseDTO extends EntityResponseDTO {
     private int frequenciaHoras;
     private MedicamentoResponseDTO medicamento;
     private String id;
+    private String consultaId;
     private LocalDateTime deletedAt;
     private LocalDateTime updatedAt;
     private LocalDateTime createdAt;

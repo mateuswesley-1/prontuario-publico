@@ -5,7 +5,6 @@ import com.devweb.prontuario.dto.Funcionario.FuncionarioRequestDTO;
 import com.devweb.prontuario.dto.atestado.AtestadoRequestDTO;
 import com.devweb.prontuario.dto.consulta.ConsultaRequestDTO;
 import com.devweb.prontuario.dto.medico.MedicoRequestDTO;
-import com.devweb.prontuario.entities.Atestado;
 import com.devweb.prontuario.entities.Consulta;
 import com.devweb.prontuario.entities.Funcionario;
 import com.devweb.prontuario.entities.Medico;
@@ -30,15 +29,15 @@ public class ConsultaIntegrationTest extends BaseIntegrationTest {
     @Order(1)
     void canRegister(){
         // Given
-        Atestado createdAtestado = getCreatedAtestado (  );
+        AtestadoRequestDTO atestadoDto = getCreatedAtestado (  );
         Funcionario createdFuncionario = getCreatedFuncionario ( );
         Medico createdMedico = getCreatedMedico ( );
 
         // When e then
         ConsultaRequestDTO dto = new ConsultaRequestDTO ();
         dto.setAnamnese ( "teste" );
-        assert createdAtestado != null;
-        dto.setIdAtestado ( createdAtestado.getId () );
+        assert atestadoDto != null;
+        dto.setAtestado ( atestadoDto );
         assert createdFuncionario != null;
         dto.setIdPaciente ( createdFuncionario.getId () );
         dto.setPrescricoes ( List.of ("presc1", "presc2", "presc3")  );
@@ -98,7 +97,7 @@ public class ConsultaIntegrationTest extends BaseIntegrationTest {
     private Consulta createConsulta() {
         // When
         // Criando atestado
-        Atestado createdAtestado = getCreatedAtestado (  );
+        AtestadoRequestDTO atestadoDto = getCreatedAtestado (  );
 
         // Criando funcionario
         Funcionario createdFuncionario = getCreatedFuncionario ( );
@@ -109,8 +108,8 @@ public class ConsultaIntegrationTest extends BaseIntegrationTest {
 
         ConsultaRequestDTO dto = new ConsultaRequestDTO ();
         dto.setAnamnese ( "teste" );
-        assert createdAtestado != null;
-        dto.setIdAtestado ( createdAtestado.getId () );
+        assert atestadoDto != null;
+        dto.setAtestado ( atestadoDto );
         assert createdFuncionario != null;
         dto.setIdPaciente ( createdFuncionario.getId () );
         dto.setPrescricoes ( List.of ("presc1", "presc2", "presc3")  );
@@ -133,11 +132,9 @@ public class ConsultaIntegrationTest extends BaseIntegrationTest {
     @Nullable
     private Medico getCreatedMedico() {
         MedicoRequestDTO dtoMedico = new MedicoRequestDTO (  );
-        dtoMedico.setCPF ( "cpf" );
-        dtoMedico.setNome ( "teste" );
-        dtoMedico.setEmail ( "email@teste" + UUID.randomUUID ( )  );
-        dtoMedico.setEndereco ( "endereco" );
-        dtoMedico.setDataNascimento ( LocalDate.now () );
+        Funcionario funcionario = getCreatedFuncionario ();
+        assert funcionario != null;
+        dtoMedico.setFuncionarioId ( funcionario.getId () );
         dtoMedico.setCrm ( 1545 );
         dtoMedico.setEspecialidade ( "teste" );
 
@@ -160,8 +157,8 @@ public class ConsultaIntegrationTest extends BaseIntegrationTest {
         FuncionarioRequestDTO dtoPaciente = new FuncionarioRequestDTO ();
         dtoPaciente.setNome ( "nome_teste" );
         dtoPaciente.setCargo ( "cargo_teste" );
-        dtoPaciente.setCPF ( "cpf_test" );
-        dtoPaciente.setEmail ( "email_test" +  UUID.randomUUID ( ) );
+        dtoPaciente.setCPF ( "46639814021" );
+        dtoPaciente.setEmail ( "email" + UUID.randomUUID ( ).toString ().substring ( 1, 5 ) + "@gmail.com"  );
         dtoPaciente.setEndereco ( "rua teste" );
         dtoPaciente.setDataNascimento ( LocalDate.now ( ) );
 
@@ -179,24 +176,12 @@ public class ConsultaIntegrationTest extends BaseIntegrationTest {
                 .getResponseBody ( );
     }
 
-    @Nullable
-    private Atestado getCreatedAtestado() {
+    private AtestadoRequestDTO getCreatedAtestado() {
 
         AtestadoRequestDTO dtoAtestado = new AtestadoRequestDTO ();
         dtoAtestado.setDescricao ( "teste" );
         dtoAtestado.setDuracao ( 10 );
-
-        return webTestClient
-                .post ( )
-                .uri ( "/atestados" )
-                .header ( "Authorization", "Bearer " + authToken )
-                .accept ( MediaType.APPLICATION_JSON )
-                .contentType ( MediaType.APPLICATION_JSON )
-                .body ( Mono.just ( dtoAtestado ), AtestadoRequestDTO.class )
-                .exchange ( )
-                .expectBody ( Atestado.class )
-                .returnResult ( )
-                .getResponseBody ( );
+        return dtoAtestado;
     }
 
 }

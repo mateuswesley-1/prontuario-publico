@@ -1,14 +1,13 @@
 package com.devweb.prontuario.services;
 
+import com.devweb.prontuario.dao.AtestadoDao;
 import com.devweb.prontuario.entities.Atestado;
 import com.devweb.prontuario.exceptions.CustomExceptions.EntityNotFoundException;
-import com.devweb.prontuario.repositories.AtestadoRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -26,13 +25,13 @@ import static org.mockito.Mockito.when;
 class AtestadoServiceTest {
     private AtestadoService underTest;
     @Mock
-    private AtestadoRepository repository;
+    private AtestadoDao dao;
     private AutoCloseable autoCloseable;
 
     @BeforeEach
     void setUp() {
         this.autoCloseable = MockitoAnnotations.openMocks ( this );
-        this.underTest = new AtestadoService ( this.repository );
+        this.underTest = new AtestadoService ( this.dao );
     }
     @AfterEach
     void tearDown() throws Exception{
@@ -46,13 +45,13 @@ class AtestadoServiceTest {
         Page<Atestado> expected = new PageImpl<> ( List.of ( atestado ) );
         //Given
         Pageable pageable = PageRequest.of ( 1, 10 );
-        when ( this.repository.findAll ( pageable ) ).thenReturn ( expected );
+        when ( this.dao.findAll ( pageable ) ).thenReturn ( expected );
 
         //When
         Page<Atestado> result = underTest.getAll ( pageable );
 
         //Then: Verifica se está chamando o método certo do repo
-        verify(this.repository).findAll ( pageable );
+        verify(this.dao).findAll ( pageable );
 
         // And: O resultado retornado pelo service é o mesmo do repo.
         assertEquals ( expected, result);
@@ -63,13 +62,13 @@ class AtestadoServiceTest {
         //Given
         Page<Atestado> expected = new PageImpl<> ( List.of (  ) );
         Pageable pageable = PageRequest.of ( 1, 10 );
-        when ( this.repository.findAll ( pageable ) ).thenReturn ( expected );
+        when ( this.dao.findAll ( pageable ) ).thenReturn ( expected );
 
         //When
         Page<Atestado> result = underTest.getAll ( pageable );
 
         //Then: Verifica se está chamando o método certo do repo
-        verify(this.repository).findAll ( pageable );
+        verify(this.dao).findAll ( pageable );
 
         // And: O resultado retornado pelo service é o mesmo do repo.
         assertEquals ( expected, result);
@@ -79,13 +78,13 @@ class AtestadoServiceTest {
     void getByIdShouldReturnRepositoryResultWithoutChanges() {
         //Given
         Atestado expected = new Atestado ( 10, "atestado teste" );
-        when ( this.repository.findById ( "id" ) ).thenReturn ( Optional.of ( expected ) );
+        when ( this.dao.findById ( "id" ) ).thenReturn ( Optional.of ( expected ) );
 
         //When
         Atestado result = this.underTest.getById ( "id" );
 
         //Then
-        verify ( this.repository ).findById ( "id" );
+        verify ( this.dao ).findById ( "id" );
         //And
         assertEquals ( expected, result );
     }
@@ -95,7 +94,7 @@ class AtestadoServiceTest {
     void getByIdShouldThrowErrorWhenIdDoesNotExist() {
         //Given
         Atestado expected = new Atestado ( 10, "atestado teste" );
-        when ( this.repository.findById ( "id_certo" ) ).thenReturn ( Optional.of ( expected ) );
+        when ( this.dao.findById ( "id_certo" ) ).thenReturn ( Optional.of ( expected ) );
 
         //When -> Then
         Throwable throwable =
@@ -119,24 +118,24 @@ class AtestadoServiceTest {
         );
 
         result.setId ( UUID.randomUUID ().toString () );
-        when( this.repository.save ( expected )).thenReturn ( Optional.of(result) );
+        when( this.dao.create ( expected )).thenReturn ( result );
 
         //When
         Atestado serviceResult = this.underTest.create ( expected );
 
         //Then
-        verify ( this.repository ).save ( expected );
+        verify ( this.dao ).create ( expected );
         assertEquals ( result, serviceResult );
 
     }
     @Test
     void delete() {
-        when(this.repository.findById ( "atestado_id" ))
+        when(this.dao.findById ( "atestadoId" ))
                 .thenReturn ( Optional.of ( new Atestado ( 10, "teste" ) ) );
         //When
-        this.underTest.delete ( "atestado_id" );
+        this.underTest.delete ( "atestadoId" );
         //Then
-        verify ( this.repository ).delete ( "atestado_id" );
+        verify ( this.dao ).delete ( "atestadoId" );
     }
 
     @Test
@@ -144,14 +143,14 @@ class AtestadoServiceTest {
         //Given:  recebe um id, e novos dados
         Atestado att = new Atestado ( 5, "novo atestado teste" );
         Atestado atual = new Atestado ( 10, "atestado teste" );
-        when ( this.repository.findById ( "atestado_id") ).thenReturn ( Optional.of ( atual ) );
+        when ( this.dao.findById ( "atestadoId") ).thenReturn ( Optional.of ( atual ) );
 
         //When: deve chamar repo.save com os novos dados
-        this.underTest.update ( "atestado_id", att );
+        this.underTest.update ( "atestadoId", att );
 
         //Then: o obj deve ter seus dados atualizados e ter upDatedAt
-        verify ( this.repository ).save ( atual );
-        assertNotNull (atual.getUpdated_at ());
+        verify ( this.dao ).update ( atual );
+        assertNotNull (atual.getUpdatedAt ());
     }
 
 }

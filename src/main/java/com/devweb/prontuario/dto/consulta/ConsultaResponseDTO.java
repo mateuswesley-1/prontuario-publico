@@ -2,8 +2,7 @@ package com.devweb.prontuario.dto.consulta;
 
 import java.util.List;
 
-import com.devweb.prontuario.controllers.ConsultaController;
-import com.devweb.prontuario.EntityResponseDTO;
+import com.devweb.prontuario.base.EntityResponseDTO;
 import com.devweb.prontuario.dto.Funcionario.FuncionarioResponseDTO;
 import com.devweb.prontuario.dto.atestado.AtestadoResponseDTO;
 import com.devweb.prontuario.dto.medico.MedicoResponseDTO;

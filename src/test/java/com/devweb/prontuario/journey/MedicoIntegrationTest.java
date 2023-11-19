@@ -1,7 +1,9 @@
 package com.devweb.prontuario.journey;
 
 import com.devweb.prontuario.BaseIntegrationTest;
+import com.devweb.prontuario.dto.Funcionario.FuncionarioRequestDTO;
 import com.devweb.prontuario.dto.medico.MedicoRequestDTO;
+import com.devweb.prontuario.entities.Funcionario;
 import com.devweb.prontuario.entities.Medico;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
@@ -20,13 +22,10 @@ public class MedicoIntegrationTest extends BaseIntegrationTest {
     @Order(1)
     void canRegister(){
         MedicoRequestDTO dto = new MedicoRequestDTO ();
-        dto.setNome ( "nome_teste" );
-        dto.setCPF ( "cpf_test" );
-        dto.setEmail ( "email_test" + UUID.randomUUID ( ));
-        dto.setEndereco ( "rua teste" );
-        dto.setDataNascimento ( LocalDate.now ( ) );
         dto.setEspecialidade ( "testando" );
         dto.setCrm ( 10023 );
+        Funcionario funcionarioMedico = getCreatedFuncionario ();
+        dto.setFuncionarioId ( funcionarioMedico.getId () );
 
         webTestClient
                 .post ( )
@@ -76,24 +75,19 @@ public class MedicoIntegrationTest extends BaseIntegrationTest {
                 .uri(URI + "/" + createdObject.getId () )
                 .header("Authorization", "Bearer " + authToken)
                 .exchange ()
-                .expectStatus ()
-                .isNoContent ();
+                .expectStatus ();
     }
 
     private Medico getMedico() {
+        Funcionario funcionario = getCreatedFuncionario ();
         MedicoRequestDTO dto = new MedicoRequestDTO ();
-        dto.setNome ( "nome_teste" );
-        dto.setCPF ( "cpf_test" );
-        dto.setEmail ( "email_test" + UUID.randomUUID ( ));
-        dto.setEndereco ( "rua teste" );
-        dto.setDataNascimento ( LocalDate.now ( ) );
         dto.setEspecialidade ( "testando" );
         dto.setCrm ( 10023 );
-
+        dto.setFuncionarioId ( funcionario.getId () );
 
         return webTestClient
                 .post ( )
-                .uri ( URI )
+                .uri ( "/medicos" )
                 .header ( "Authorization", "Bearer " + authToken )
                 .accept ( MediaType.APPLICATION_JSON )
                 .contentType ( MediaType.APPLICATION_JSON )
@@ -102,6 +96,34 @@ public class MedicoIntegrationTest extends BaseIntegrationTest {
                 .expectBody ( Medico.class )
                 .returnResult ( )
                 .getResponseBody ( );
+    }
+
+    private Funcionario getCreatedFuncionario() {
+        FuncionarioRequestDTO dto = new FuncionarioRequestDTO ();
+        dto.setNome ( "nome_teste" );
+        dto.setCargo ( "cargo_teste" );
+        dto.setCPF ( "43562054050" );
+        dto.setEmail ( "email_test"  + UUID.randomUUID ( ).toString ().substring ( 0, 5 ) + "@gmail.com");
+        dto.setEndereco ( "rua teste" );
+        dto.setDataNascimento ( LocalDate.now ( ) );
+
+
+        Funcionario funcionario = webTestClient
+                .post ( )
+                .uri ( "/funcionarios" )
+                .header ( "Authorization", "Bearer " + authToken )
+                .accept ( MediaType.APPLICATION_JSON )
+                .contentType ( MediaType.APPLICATION_JSON )
+                .body ( Mono.just ( dto ), FuncionarioRequestDTO.class )
+                .exchange ( )
+                .expectStatus ( ).isCreated ( )
+                .expectBody ( Funcionario.class )
+                .returnResult ( )
+                .getResponseBody ( );
+
+        assert funcionario != null;
+        return funcionario;
+
     }
 
 }

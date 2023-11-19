@@ -1,14 +1,13 @@
 package com.devweb.prontuario.services;
 
+import com.devweb.prontuario.dao.MedicoDao;
 import com.devweb.prontuario.entities.Medico;
 import com.devweb.prontuario.exceptions.CustomExceptions.EntityNotFoundException;
-import com.devweb.prontuario.repositories.MedicoRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -24,13 +23,13 @@ import static org.mockito.Mockito.when;
 class MedicoServiceTest  {
     private MedicoService underTest;
     @Mock
-    private MedicoRepository repository;
+    private MedicoDao dao;
     private AutoCloseable autoCloseable;
 
     @BeforeEach
     void setUp() {
         this.autoCloseable = MockitoAnnotations.openMocks ( this );
-        this.underTest = new MedicoService ( this.repository );
+        this.underTest = new MedicoService ( this.dao );
     }
     @AfterEach
     void tearDown() throws Exception{
@@ -48,13 +47,13 @@ class MedicoServiceTest  {
         Page<Medico> expected = new PageImpl<> ( List.of ( medico ) );
         //Given
         Pageable pageable = PageRequest.of ( 1, 10 );
-        when ( this.repository.findAll ( pageable ) ).thenReturn ( expected );
+        when ( this.dao.findAll ( pageable ) ).thenReturn ( expected );
 
         //When
         Page<Medico> result = underTest.getAll ( pageable );
 
         //Then: Verifica se está chamando o método certo do repo
-        verify(this.repository).findAll ( pageable );
+        verify(this.dao).findAll ( pageable );
 
         // And: O resultado retornado pelo service é o mesmo do repo.
         assertEquals ( expected, result);
@@ -65,13 +64,13 @@ class MedicoServiceTest  {
         //Given
         Page<Medico> expected = new PageImpl<> ( List.of (  ) );
         Pageable pageable = PageRequest.of ( 1, 10 );
-        when ( this.repository.findAll ( pageable ) ).thenReturn ( expected );
+        when ( this.dao.findAll ( pageable ) ).thenReturn ( expected );
 
         //When
         Page<Medico> result = underTest.getAll ( pageable );
 
         //Then: Verifica se está chamando o método certo do repo
-        verify(this.repository).findAll ( pageable );
+        verify(this.dao).findAll ( pageable );
 
         // And: O resultado retornado pelo service é o mesmo do repo.
         assertEquals ( expected, result);
@@ -85,13 +84,13 @@ class MedicoServiceTest  {
                 100,
                 "protologista"
         );
-        when ( this.repository.findById ( "id" ) ).thenReturn ( Optional.of ( expected ) );
+        when ( this.dao.findById ( "id" ) ).thenReturn ( Optional.of ( expected ) );
 
         //When
         Medico result = this.underTest.getById ( "id" );
 
         //Then
-        verify ( this.repository ).findById ( "id" );
+        verify ( this.dao ).findById ( "id" );
         //And
         assertEquals ( expected, result );
     }
@@ -105,7 +104,7 @@ class MedicoServiceTest  {
                 100,
                 "protologista"
         );
-        when ( this.repository.findById ( "id_certo" ) ).thenReturn ( Optional.of ( expected ) );
+        when ( this.dao.findById ( "id_certo" ) ).thenReturn ( Optional.of ( expected ) );
 
         //When -> Then
         Throwable throwable =
@@ -126,30 +125,30 @@ class MedicoServiceTest  {
                 "protologista"
         );
 
-        Medico result =  new Medico ( expected.getFuncionario_id (), expected.getCrm (), expected.getEspecialidade ( ) );
+        Medico result =  new Medico ( expected.getFuncionarioId (), expected.getCrm (), expected.getEspecialidade ( ) );
         result.setId ( UUID.randomUUID ().toString () );
-        when(this.repository.save ( expected )).thenReturn ( Optional.of(result) );
+        when(this.dao.create ( expected )).thenReturn ( result );
 
         //When
         Medico testResult = this.underTest.create ( expected );
 
         //Then
-        verify ( this.repository ).save ( expected );
+        verify ( this.dao ).create ( expected );
         assertEquals ( result, testResult );
 
     }
     @Test
     void delete() {
-        when(this.repository.findById ( "medico_id" ))
+        when(this.dao.findById ( "medicoId" ))
                 .thenReturn ( Optional.of ( new Medico (
                         "funcionario_id",
                         100,
                         "protologista"
                 ) ) );
         //When
-        this.underTest.delete ( "medico_id" );
+        this.underTest.delete ( "medicoId" );
         //Then
-        verify ( this.repository ).delete ( "medico_id" );
+        verify ( this.dao ).delete ( "medicoId" );
     }
 
     @Test
@@ -165,13 +164,13 @@ class MedicoServiceTest  {
                 100,
                 "protologista"
         );
-        when ( this.repository.findById ( "medico_id") ).thenReturn ( Optional.of ( atual ) );
+        when ( this.dao.findById ( "medicoId") ).thenReturn ( Optional.of ( atual ) );
 
         //When: deve chamar repo.save com os novos dados
-        this.underTest.update ( "medico_id", att );
+        this.underTest.update ( "medicoId", att );
 
         //Then: o obj deve ter seus dados atualizados e ter upDatedAt
-        verify ( this.repository ).save ( atual );
-        assertNotNull (atual.getUpdated_at ());
+        verify ( this.dao ).update ( atual );
+        assertNotNull (atual.getUpdatedAt ());
     }
 }

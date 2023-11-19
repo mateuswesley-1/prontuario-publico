@@ -1,7 +1,6 @@
 package com.devweb.prontuario.dto.medico;
 
-import com.devweb.prontuario.controllers.MedicoController;
-import com.devweb.prontuario.EntityResponseDTO;
+import com.devweb.prontuario.base.EntityResponseDTO;
 import lombok.Getter;
 import lombok.Setter;
 

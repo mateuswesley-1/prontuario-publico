@@ -1,7 +1,7 @@
 package com.devweb.prontuario.services;
 
+import com.devweb.prontuario.dao.CredenciaisDao;
 import com.devweb.prontuario.entities.Credenciais;
-import com.devweb.prontuario.repositories.CredenciaisRepository;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -27,7 +26,7 @@ class CredenciaisServiceTest {
 
     private CredenciaisService underTest;
     @Mock
-    private CredenciaisRepository repository;
+    private CredenciaisDao dao;
     @Mock
     private BCryptPasswordEncoder encoder;
     private AutoCloseable autoCloseable;
@@ -35,7 +34,7 @@ class CredenciaisServiceTest {
     @BeforeEach
     void setUp() {
         this.autoCloseable = MockitoAnnotations.openMocks ( this );
-        this.underTest = new CredenciaisService ( this.repository, this.encoder );
+        this.underTest = new CredenciaisService ( this.dao, this.encoder );
     }
     @AfterEach
     void tearDown() throws Exception{
@@ -48,7 +47,7 @@ class CredenciaisServiceTest {
 
         //Given
         Pageable pageable = PageRequest.of ( 1, 10 );
-        when(this.repository.findAll ( pageable )).thenThrow ( UnsupportedOperationException.class );
+        when(this.dao.findAll ( pageable )).thenThrow ( UnsupportedOperationException.class );
 
         //When -> Then
         assertThrows (
@@ -61,7 +60,7 @@ class CredenciaisServiceTest {
     @Test
     void getByIdShouldThrowException() {
         //Given
-        when ( this.repository.findById ( "credenciais_id" ) ).thenThrow ( UnsupportedOperationException.class );
+        when ( this.dao.findById ( "credenciais_id" ) ).thenThrow ( UnsupportedOperationException.class );
 
         //when -> then
         assertThrows (
@@ -82,24 +81,24 @@ class CredenciaisServiceTest {
         result.setPassword ( expected.getPassword ( ) );
         result.setId ( UUID.randomUUID ().toString () );
 
-        when( this.repository.save ( expected )).thenReturn ( Optional.of(result) );
+        when( this.dao.save ( expected )).thenReturn ( result );
 
         //When
         Credenciais serviceResult = this.underTest.create ( expected );
 
         //Then
-        verify ( this.repository ).save ( expected );
+        verify ( this.dao ).save ( expected );
         assertEquals ( result, serviceResult );
 
     }
     @Test
     void deleteShouldThrowException() {
         //Given
-        when(this.repository.findById ( "credenciais_id" )).thenReturn ( Optional.of ( new Credenciais () ) );
+        when(this.dao.findById ( "credenciais_id" )).thenReturn ( Optional.of ( new Credenciais () ) );
         //When
         this.underTest.delete ( "credenciais_id" );
         //Then
-        verify ( this.repository ).delete ( "credenciais_id" );
+        verify ( this.dao ).delete ( "credenciais_id" );
     }
 
 }

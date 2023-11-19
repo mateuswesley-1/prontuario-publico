@@ -1,24 +1,24 @@
 package com.devweb.prontuario.services;
 
-import com.devweb.prontuario.BaseService;
-import com.devweb.prontuario.repositories.ConsultaRepository;
+import com.devweb.prontuario.base.BaseService;
+import com.devweb.prontuario.dao.ConsultaDao;
 import org.springframework.stereotype.Service;
 
 import com.devweb.prontuario.entities.Consulta;
 
 @Service
-public class ConsultaService extends BaseService<Consulta, ConsultaRepository> {
+public class ConsultaService extends BaseService<Consulta, ConsultaDao> {
 
-    protected ConsultaService(ConsultaRepository repository) {
-        super(repository, Consulta.class);
+    protected ConsultaService(ConsultaDao dao) {
+        super(dao, Consulta.class);
     }
 
     @Override
     public void patch(Consulta novo, Consulta atual) {
         if(novo.getAnamnese() != null) atual.setAnamnese(novo.getAnamnese());
-        if(novo.getAtestado_id () != null) atual.setAtestado_id (novo.getAtestado_id ());
-        if(novo.getMedico_id () != null) atual.setMedico_id (novo.getMedico_id ());
-        if(novo.getPaciente_id () != null) atual.setPaciente_id (novo.getPaciente_id ());
+        if(novo.getAtestado () != null) atual.setAtestado (novo.getAtestado ());
+        if(novo.getMedicoId () != null) atual.setMedicoId (novo.getMedicoId ());
+        if(novo.getPacienteId () != null) atual.setPacienteId (novo.getPacienteId ());
     }
     
 }

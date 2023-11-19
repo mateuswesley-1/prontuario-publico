@@ -1,6 +1,6 @@
 package com.devweb.prontuario.dto.atestado;
 
-import com.devweb.prontuario.EntityRequestDTO;
+import com.devweb.prontuario.base.EntityRequestDTO;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

@@ -1,8 +1,6 @@
 package com.devweb.prontuario;
 
 import com.github.javafaker.Faker;
-import org.flywaydb.core.Flyway;
-import org.junit.jupiter.api.BeforeEach;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.testcontainers.containers.PostgreSQLContainer;
@@ -13,19 +11,6 @@ import javax.sql.DataSource;
 
 @Testcontainers
 public class BaseTestContainers {
-
-    @BeforeEach
-     void beforeAll() {
-        Flyway flyway = Flyway.configure().dataSource(
-                postgreSQLContainer.getJdbcUrl(),
-                postgreSQLContainer.getUsername(),
-                postgreSQLContainer.getPassword()
-        )
-                .locations("classpath:db/test_migration")
-                .load();
-
-        flyway.migrate();
-    }
 
     @Container
     protected final PostgreSQLContainer<?> postgreSQLContainer =

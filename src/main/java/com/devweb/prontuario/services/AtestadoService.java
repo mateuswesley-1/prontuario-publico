@@ -1,16 +1,16 @@
 package com.devweb.prontuario.services;
 
-import com.devweb.prontuario.BaseService;
+import com.devweb.prontuario.base.BaseService;
+import com.devweb.prontuario.dao.AtestadoDao;
 import org.springframework.stereotype.Service;
 
 import com.devweb.prontuario.entities.Atestado;
-import com.devweb.prontuario.repositories.AtestadoRepository;
 
 @Service
-public class AtestadoService extends BaseService<Atestado, AtestadoRepository> {
+public class AtestadoService extends BaseService<Atestado, AtestadoDao> {
 
-    protected AtestadoService(AtestadoRepository repository) {
-        super(repository, Atestado.class);
+    public AtestadoService(AtestadoDao dao) {
+        super(dao, Atestado.class);
     }
 
     public void patch(Atestado novo, Atestado atual) {

@@ -26,6 +26,4 @@ public class ProntuarioApplication{
 		SpringApplication.run(ProntuarioApplication.class, args);
 	}
 
-
-
 }

@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.devweb.prontuario.exceptions.CustomExceptions.EntityNotFoundException;
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,4 +31,15 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
 
         return new ResponseEntity<>(body, HttpStatus.CONFLICT);
     }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    ResponseEntity<Object> handleConstrainViolationException(ConstraintViolationException e){
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("message", e.getMessage());
+
+        return new ResponseEntity<>(body, HttpStatus.CONFLICT);
+    }
+
+
 }

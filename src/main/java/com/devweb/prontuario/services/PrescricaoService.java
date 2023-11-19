@@ -1,16 +1,16 @@
 package com.devweb.prontuario.services;
 
-import com.devweb.prontuario.BaseService;
-import com.devweb.prontuario.repositories.PrescricaoRepository;
+import com.devweb.prontuario.base.BaseService;
+import com.devweb.prontuario.dao.PrescricaoDao;
 import org.springframework.stereotype.Service;
 
 import com.devweb.prontuario.entities.Prescricao;
 
 @Service
-public class PrescricaoService extends BaseService<Prescricao, PrescricaoRepository> {
+public class PrescricaoService extends BaseService<Prescricao, PrescricaoDao> {
 
-    protected PrescricaoService(PrescricaoRepository repository) {
-        super(repository, Prescricao.class);
+    protected PrescricaoService(PrescricaoDao dao) {
+        super(dao, Prescricao.class);
     }
 
     @Override

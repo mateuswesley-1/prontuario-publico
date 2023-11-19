@@ -1,10 +1,8 @@
 package com.devweb.prontuario.dto.Funcionario;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
-import com.devweb.prontuario.controllers.FuncionarioController;
-import com.devweb.prontuario.EntityResponseDTO;
+import com.devweb.prontuario.base.EntityResponseDTO;
 
 import lombok.*;
 

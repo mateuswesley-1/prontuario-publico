@@ -1,22 +1,22 @@
 package com.devweb.prontuario.services;
 
-import com.devweb.prontuario.BaseService;
+import com.devweb.prontuario.base.BaseService;
+import com.devweb.prontuario.dao.MedicoDao;
 import org.springframework.stereotype.Service;
 
 import com.devweb.prontuario.entities.Medico;
-import com.devweb.prontuario.repositories.MedicoRepository;
 
 @Service
-public class MedicoService extends BaseService<Medico, MedicoRepository> {
+public class MedicoService extends BaseService<Medico, MedicoDao> {
 
 
-    protected MedicoService(MedicoRepository repository) {
-        super(repository, Medico.class);
+    protected MedicoService(MedicoDao dao) {
+        super(dao, Medico.class);
     }
 
     @Override
     public void patch(Medico novo, Medico atual) {
-        if(novo.getFuncionario_id () != null) atual.setFuncionario_id (novo.getFuncionario_id ());
+        if(novo.getFuncionarioId () != null) atual.setFuncionarioId (novo.getFuncionarioId ());
         if(novo.getCrm() != 0) atual.setCrm(novo.getCrm());
         if(novo.getEspecialidade() != null) atual.setEspecialidade(novo.getEspecialidade());
     }

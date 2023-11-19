@@ -1,16 +1,16 @@
 package com.devweb.prontuario.services;
 
-import com.devweb.prontuario.BaseService;
-import com.devweb.prontuario.repositories.MedicamentoRepository;
+import com.devweb.prontuario.base.BaseService;
+import com.devweb.prontuario.dao.MedicamentoDao;
 import org.springframework.stereotype.Service;
 
 import com.devweb.prontuario.entities.Medicamento;
 
 @Service
-public class MedicamentoService extends BaseService<Medicamento, MedicamentoRepository> {
+public class MedicamentoService extends BaseService<Medicamento, MedicamentoDao> {
 
-    protected MedicamentoService(MedicamentoRepository repository) {
-        super(repository, Medicamento.class);
+    protected MedicamentoService(MedicamentoDao dao) {
+        super(dao, Medicamento.class);
     }
 
     @Override
